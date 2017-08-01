@@ -11,7 +11,7 @@ namespace UnipiForum.Controllers
         // GET: Auth
         public ActionResult Login()
         {
-            return Content("LOGIN");
+            return View();
         }
     }
 }

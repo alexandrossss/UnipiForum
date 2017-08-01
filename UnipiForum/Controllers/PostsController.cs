@@ -10,7 +10,7 @@ namespace UnipiForum.Controllers
     {
         public ActionResult Index()
         {
-            return Content("e");
+            return View();
         }
     }
 }

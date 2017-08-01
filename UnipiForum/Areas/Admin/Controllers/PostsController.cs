@@ -11,7 +11,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         // GET: Admin/Posts
         public ActionResult Index()
         {
-            return Content("AdminPosts");
+            return View();
         }
     }
-}
+}  
