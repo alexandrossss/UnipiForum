@@ -12,7 +12,11 @@
 </head>
 <body>
 <header>
-    <h1>UNIPI FORUM</h1>
+    @Html.ActionLink("UNIPI FORUM","About","Home") 
+    
+    <a href="@Url.RouteUrl("Home" )">About us</a>
+    
+    <a href="@Url.RouteUrl("login")">Login</a>
 </header>
 
 @RenderBody()
