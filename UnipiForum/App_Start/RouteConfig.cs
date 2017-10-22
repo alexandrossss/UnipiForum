@@ -23,9 +23,6 @@ namespace UnipiForum
 
 
             routes.MapRoute("About", "about", new { controller = "Home", action = "About" }, namespaces);
-
-
-
         }
     }
 }
