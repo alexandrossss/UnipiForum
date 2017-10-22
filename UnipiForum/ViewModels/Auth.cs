@@ -5,7 +5,4 @@ using System.Web;
 
 namespace UnipiForum.ViewModels
 {
-    public class Class1
-    {
-    }
 }
