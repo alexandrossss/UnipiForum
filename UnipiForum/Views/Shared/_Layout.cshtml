@@ -3,18 +3,20 @@
 <!DOCTYPE html>
 <html>   
 <head>
-    <title>title</title>
+    <title>@ViewBag.title - Simple Blog </title>
 </head>
 <body>
 <header>
     @Html.ActionLink("UNIPI FORUM","About","Home") 
     
-    <a href="@Url.RouteUrl("Home" )">About us</a>
+    <a href="@Url.RouteUrl("Home" )">Simple Blog</a>
     
     <a href="@Url.RouteUrl("login")">Login</a>
 </header>
 
 @RenderBody()
+    
+    @RenderSection("Scripts",false)
 
 </body>
 </html>

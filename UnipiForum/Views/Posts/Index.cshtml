@@ -1,19 +1,20 @@
-﻿
-<!DOCTYPE html>
+﻿@{
+    ViewBag.Title = "Posts";
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<div>
-    <h1>general POSTS INDEX</h1>
 
-    <p>
-        <a href="@Url.RouteUrl("login")">click here</a> to login
-    </p>
+<h1>general POSTS INDEX</h1>
 
-</div>
-</body>
-</html>
+<p>
+    <a href="@Url.RouteUrl("login")">click here</a> to login
+</p>
+
+
+@section scripts
+{
+    <script>
+        alert("HI")        
+    </script>
+}
+
+
