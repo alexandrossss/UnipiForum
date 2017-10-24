@@ -1,6 +1,15 @@
-﻿@{
+﻿@model UnipiForum.ViewModels.AuthLogin
+
+
+@{
     ViewBag.Title = "Posts";
 }
 
+@using (Html.BeginForm())
 
-<p>THIS IS THE LOGIN VIEW</p>
+
+<form method="post">
+    <input type="text" name="Username" />
+    <input type="password" name="Password" />
+    <input type="submit" name="Login" />
+</form>
