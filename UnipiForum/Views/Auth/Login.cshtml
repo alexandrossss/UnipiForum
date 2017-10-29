@@ -2,14 +2,27 @@
 
 
 @{
-    ViewBag.Title = "Posts";
+    ViewBag.Title = "Login";
 }
 
+
+
+
 @using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <div>
+        @Html.LabelFor(x=>x.Username)
+        @Html.EditorFor(x => x.Username)
+    </div>
 
-
-<form method="post">
-    <input type="text" name="Username" />
-    <input type="password" name="Password" />
-    <input type="submit" name="Login" />
-</form>
+    <div>
+        @Html.LabelFor(x => x.Password)
+        @Html.EditorFor(x => x.Password)
+    </div>
+    
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+}
+ 
