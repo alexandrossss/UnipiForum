@@ -6,12 +6,13 @@ using System.Web.Mvc;
 
 namespace UnipiForum.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class PostsController : Controller
     {
         // GET: Admin/Posts
         public ActionResult Index()
         {
-            return View("~/Areas/Admin/Views/Index.cshtml");
+            return View();
         }
     }
 }  
