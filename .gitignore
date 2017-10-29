@@ -10,3 +10,10 @@ obj
 *.pdb
 
 _Resharper*
+/.vs/UnipiForum/v15/sqlite3/db.lock
+/.vs/UnipiForum/v15/sqlite3
+/.vs/UnipiForum/v15/Server/sqlite3/storage.ide-wal
+/.vs/UnipiForum/v15/Server/sqlite3/storage.ide-shm
+/.vs/UnipiForum/v15/Server/sqlite3/storage.ide
+/.vs/UnipiForum/v15/Server/sqlite3/db.lock
+
