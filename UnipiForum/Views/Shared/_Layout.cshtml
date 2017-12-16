@@ -4,13 +4,14 @@
 <html>   
 <head>
     <title>@ViewBag.title - Simple Blog </title>
+    @Styles.Render("~/styles")
 </head>
 <body>
 <header>
     @Html.ActionLink("UNIPI FORUM","About","Home") 
     
     <a href="@Url.RouteUrl("Home" )">Simple Blog</a>
-    
+    <i class="glyphicon glyphicon-bell"></i>
     @if (User.Identity.IsAuthenticated)
     {
         <p>Welcome back, @User.Identity.Name</p>
@@ -28,7 +29,7 @@
 </header>
 
 @RenderBody()
-    
+    @Scripts.Render("~/scripts")
     @RenderSection("Scripts",false)
 
 </body>
