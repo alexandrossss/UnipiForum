@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Blog Admin</title>
+        @Styles.Render("~/admin/styles")
+    </head>
+    <body>
+
+        @RenderBody()
+        <h1 ></h1>
+        @Scripts.Render("~/scripts")
+        @RenderSection("Scripts", false)
+
+    </body>
+</html>
