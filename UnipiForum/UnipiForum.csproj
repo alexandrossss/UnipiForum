@@ -194,6 +194,7 @@
     <Content Include="Areas\Admin\Views\Shared\Posts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
