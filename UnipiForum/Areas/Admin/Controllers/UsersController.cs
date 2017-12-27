@@ -12,7 +12,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View();
+            return Content("Users");
         }
     }
 }
