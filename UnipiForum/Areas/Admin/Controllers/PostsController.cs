@@ -13,6 +13,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+            //comments
         }
     }
 }  
