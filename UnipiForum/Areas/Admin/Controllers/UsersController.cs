@@ -22,5 +22,35 @@ namespace UnipiForum.Areas.Admin.Controllers
                 Users = Database.Session.Query<User>().ToList()
             });
         }
+
+        public ActionResult New()
+        {
+            return View(new UsersNew
+            {
+
+            });
+        }
+        [HttpPost]
+        public ActionResult New(UsersNew form)
+        {
+            //var user = new User();
+            //SyncRoles(form.Roles, user.Roles);
+
+            if (Database.Session.Query<User>().Any(u => u.Username == form.Username))
+                ModelState.AddModelError("Username", "Username must be unique");
+
+            if (!ModelState.IsValid)
+                return View(form);
+
+            var user = new User();
+            user.Email = form.Email;
+            user.Username = form.Username;
+            user.SetPassword(form.Password);
+
+            Database.Session.Save(user);
+            return RedirectToAction("index");
+
+
+        }
     }
 }
