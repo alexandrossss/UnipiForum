@@ -49,8 +49,6 @@ namespace UnipiForum.Areas.Admin.Controllers
 
             Database.Session.Save(user);
             return RedirectToAction("index");
-
-
         }
     }
 }
