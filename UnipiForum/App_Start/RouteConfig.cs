@@ -15,6 +15,7 @@ namespace UnipiForum
             var namespaces = new[] { typeof(PostsController).Namespace };
 
 
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" }, namespaces);

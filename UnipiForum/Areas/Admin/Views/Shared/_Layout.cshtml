@@ -2,6 +2,15 @@
 @{
     Layout = null;
 }
+
+
+@helper SelectedTabClass(string tabName)
+    {
+        if (tabName == ViewBag.SelectedTab)
+        {
+            @: active
+        }
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +20,10 @@
 <body>
     <div class="container">
         <ul class="nav nav-pills">
-            <li>
+            <li class="@(SelectedTabClass("posts"))">
                 @Html.ActionLink("Posts", "Index", "Posts", new { area = "admin" }, new { })
             </li>
-            <li>
+            <li class="@(SelectedTabClass("users"))">
                 @Html.ActionLink("Users", "Index", "Users", new { area = "admin" }, new { })
             </li>
             <li class="pull-right">
@@ -23,6 +32,7 @@
         </ul>
         @RenderBody()
     </div>
+
     @Scripts.Render("~/admin/scripts")
     @RenderSection("Scripts", false)
 

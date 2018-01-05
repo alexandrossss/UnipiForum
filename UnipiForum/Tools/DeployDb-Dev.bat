@@ -1,0 +1,1 @@
+..\..\packages\FluentMigrator.1.6.2\tools\Migrate.exe --db=mysql --target=..\bin\unipiforum.dll --configPath=..\Web.config -c=MainDb
