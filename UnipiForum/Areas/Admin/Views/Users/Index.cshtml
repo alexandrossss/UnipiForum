@@ -10,7 +10,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Id</th>
+        <th>User Id</th>
         <th>Username</th>
         <th>Email</th>
         <th>Roles</th>
@@ -21,7 +21,7 @@
     @foreach (var user in Model.Users)
     { 
         <tr>
-            <td>@user.Id</td>
+            <td>@user.UserId</td>
             <td>@user.Username</td>
             <td>@user.Email</td>
             <td>@*@string.Join(", ",user.Roles.Select(role => role.Name))*@{todo}</td>   

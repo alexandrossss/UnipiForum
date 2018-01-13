@@ -6,6 +6,8 @@ namespace UnipiForum.Models
     public class User
     {
         public virtual int Id { get; set; }
+
+        public virtual string UserId{ get; set; }
         public virtual string Username { get; set; }
         public virtual string Email { get; set; }
         public virtual string PasswordHash { get; set; }
@@ -22,7 +24,7 @@ namespace UnipiForum.Models
         {
             Table("users");
             Id(x=>x.Id,x=>x.Generator(Generators.Identity));
-
+            Property(x => x.UserId, x => x.NotNullable(true));
             Property(x => x.Username, x => x.NotNullable(true));
             Property(x => x.Email, x => x.NotNullable(true));
 
