@@ -15,8 +15,6 @@ namespace UnipiForum.Infrastructure
                 Database.Session.Transaction.Commit();
             else
                 Database.Session.Transaction.Rollback();
-
-
         }
     }
 }
