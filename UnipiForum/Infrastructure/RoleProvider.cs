@@ -15,11 +15,8 @@ namespace UnipiForum.Infrastructure
         public override string[] GetRolesForUser(string username)
         {
 
-            if (username == "alex")
-                return new[] { "admin" };
+            return Auth.User.Roles.Select(role => role.Name).ToArray();
 
-            return new string[] { };
- 
         }
 
         public override void CreateRole(string roleName)

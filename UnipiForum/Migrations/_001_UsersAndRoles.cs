@@ -10,6 +10,7 @@ namespace UnipiForum.Migrations
         {
             Create.Table("users")
                 .WithColumn("id").AsInt32().Identity().PrimaryKey()
+                .WithColumn("userId").AsString(128)
                 .WithColumn("username").AsString(128)
                 .WithColumn("email").AsCustom("VARCHAR(256)")
                 .WithColumn("password_hash").AsString(128);

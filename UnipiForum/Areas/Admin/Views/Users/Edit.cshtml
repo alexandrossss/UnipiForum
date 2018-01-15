@@ -1,12 +1,12 @@
-﻿@model UnipiForum.Areas.Admin.ViewModels.UsersNew
+﻿@model UnipiForum.Areas.Admin.ViewModels.UsersEdit
 
-<h1>New User</h1>
+<h1>Edit User @Model.Username</h1>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+  
     @Html.ValidationSummary()
-    
     <div class="form-group">
         @Html.LabelFor(f => f.UserId)
         @Html.TextBoxFor(f => f.UserId, new { @class = "form-control" })
@@ -21,14 +21,9 @@
         @Html.TextBoxFor(f => f.Email, new { @class = "form-control", type = "email" })
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(f => f.Password)
-        @Html.PasswordFor(f => f.Password, new { @class = "form-control" })
-    </div>
-
     @Html.Partial("_RoleEditor", Model.Roles)
 
-    <input type="submit" value="Create User" class="btn btn-primary" />
+    <input type="submit" value="Update User" class="btn btn-primary" />
     <a href="@Url.Action("Index")">or cancel</a>
 }
 

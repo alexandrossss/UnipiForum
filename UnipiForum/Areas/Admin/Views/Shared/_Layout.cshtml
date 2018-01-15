@@ -21,7 +21,7 @@
     <div class="container">
         <ul class="nav nav-pills">
             <li class="@(SelectedTabClass("posts"))">
-                @Html.ActionLink("Posts", "Index", "Posts", new { area = "admin" }, new { })
+                @Html.ActionLink("Rooms", "Index", "Posts", new { area = "admin" }, new { })
             </li>
             <li class="@(SelectedTabClass("users"))">
                 @Html.ActionLink("Users", "Index", "Users", new { area = "admin" }, new { })
@@ -33,8 +33,12 @@
         @RenderBody()
     </div>
 
-    @Scripts.Render("~/admin/scripts")
+    @*@Scripts.Render("~/admin/scripts")*@
     @RenderSection("Scripts", false)
+
+    <form class="Hidden" id="anti-forgery-form">
+        @Html.AntiForgeryToken()
+    </form>
 
 </body>
 </html>

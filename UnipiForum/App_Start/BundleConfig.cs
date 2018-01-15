@@ -23,7 +23,8 @@ namespace UnipiForum
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery.validate.unobtrusive.js")
                 .Include("~/Scripts/bootstrap.js")
-                .Include("~/areas/admin/scripts/forms.js"));
+                .Include("~/areas/admin/scripts/forms.js")
+                );
 
             bundles.Add(new ScriptBundle("~/admin/post/scripts")
                 .Include("~/areas/admin/scripts/posteditor.js"));
