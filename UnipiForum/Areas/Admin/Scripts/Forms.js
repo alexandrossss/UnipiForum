@@ -1,12 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $("a[data-post]").click(function(e) {
-        e.preventDefault();
+    $("a[data-post]").click(function (e) {
+        //e.preventDefault();
 
         var $this = $(this);
-        var messege = $this.data("post");
-
-        if (messege && !confirm(messege))
+        var message = $this.data("post");
+        debugger;
+        if (message && !confirm(message))
             return;
 
         var antiForgeryToken = $("#anti-forgery-form input");
@@ -19,22 +19,22 @@ $(document).ready(function() {
             .submit();
     });
 
-    $("[data-slug]").each(function() {
+    //$("[data-slug]").each(function() {
 
-        var $this = $(this);
-        var $sendSlugFrom = $($this.data("slug"));
+    //    var $this = $(this);
+    //    var $sendSlugFrom = $($this.data("slug"));
 
-        $sendSlugFrom.keyup(function() {
-            var slug = $sendSlugFrom.val();
-            slug = slug.replace(/[^a-zA-Z0-9\s]/g, "");
-            slug = slug.toLowerCase();
-            slug = slug.replace(/\s+/g, "-");
-            
-            if (slug.charAt(slug.lenght - 1) === "-")
-                slug = slug.substr(0, slug.lenght - 1);
+    //    $sendSlugFrom.keyup(function() {
+    //        var slug = $sendSlugFrom.val();
+    //        slug = slug.replace(/[^a-zA-Z0-9\s]/g, "");
+    //        slug = slug.toLowerCase();
+    //        slug = slug.replace(/\s+/g, "-");
 
-            $this.val(slug);
-        });
-    });
+    //        if (slug.charAt(slug.lenght - 1) === "-")
+    //            slug = slug.substr(0, slug.lenght - 1);
+
+    //        $this.val(slug);
+    //    });
+    //});
 
 });
