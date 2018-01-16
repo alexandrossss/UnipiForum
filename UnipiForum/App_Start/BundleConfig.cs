@@ -18,11 +18,13 @@ namespace UnipiForum
                 "~/Content/styles/bootstrap.css",
                 "~/Content/styles/site.css"));
 
-            bundles.Add(new ScriptBundle("~/admin/scripts")
+            bundles.Add(new Bundle("~/admin/scripts")
                 .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery.validate.unobtrusive.js")
-                .Include("~/Scripts/bootstrap.js"));
+                .Include("~/Scripts/bootstrap.js")
+                .Include("~/Areas/Admin/Scripts/forms.js")
+                );
 
             bundles.Add(new ScriptBundle("~/admin/post/scripts")
                 .Include("~/areas/admin/scripts/posteditor.js"));
