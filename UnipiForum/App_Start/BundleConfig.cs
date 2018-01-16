@@ -19,23 +19,26 @@ namespace UnipiForum
                 "~/Content/styles/site.css"));
 
             bundles.Add(new ScriptBundle("~/admin/scripts")
-                .Include("~/Scripts/jquery-jquery-3.2.1")
+                .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery.validate.unobtrusive.js")
-                .Include("~/Scripts/bootstrap.js")
-                .Include("~/areas/admin/scripts/forms.js")
-                );
+                .Include("~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/admin/post/scripts")
                 .Include("~/areas/admin/scripts/posteditor.js"));
 
             bundles.Add(new ScriptBundle("~/scripts")
-                .Include("~/Scripts/jquery-jquery-3.2.1")
+                .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/jquery.timeago.js")
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery.validate.unobtrusive.js")
                 .Include("~/Scripts/bootstrap.js")
                 .Include("~/Scripts/Frontend.js"));
+
+            //bundles.IgnoreList.Clear();
+
+            //BundleTable.EnableOptimizations = true;
+            
             //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
             //            "~/Scripts/jquery-{version}.js"));
 
