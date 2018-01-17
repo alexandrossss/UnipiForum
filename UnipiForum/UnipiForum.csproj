@@ -295,7 +295,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>29084</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:29084/</IISUrl>
+          <IISUrl>http://localhost/unipiForum/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
