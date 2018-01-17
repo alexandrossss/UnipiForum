@@ -29,7 +29,7 @@ namespace UnipiForum
             bundles.Add(new ScriptBundle("~/admin/post/scripts")
                 .Include("~/areas/admin/scripts/posteditor.js"));
 
-            bundles.Add(new ScriptBundle("~/scripts")
+            bundles.Add(new Bundle("~/scripts")
                 .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/jquery.timeago.js")
                 .Include("~/Scripts/jquery.validate.js")
