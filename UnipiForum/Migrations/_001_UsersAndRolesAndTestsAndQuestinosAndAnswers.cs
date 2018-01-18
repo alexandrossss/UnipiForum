@@ -19,9 +19,28 @@ namespace UnipiForum.Migrations
                 .WithColumn("id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("name").AsString(128);
 
+            Create.Table("tests")
+                .WithColumn("id").AsInt32().PrimaryKey().Identity()
+                .WithColumn("user_id").AsInt32().ForeignKey("users", "id")
+                .WithColumn("testtext").AsCustom("VARCHAR(256)")
+                .WithColumn("testtype").AsInt32()
+                .WithColumn("isvisibletootheradmins").AsBoolean();
+
+            Create.Table("questions")
+                .WithColumn("id").AsInt32().PrimaryKey().Identity()
+                .WithColumn("questiontext").AsCustom("VARCHAR(256)")
+                .WithColumn("Test_id").AsInt32().ForeignKey("Tests", "id");
+
+            Create.Table("answers")
+                .WithColumn("id").AsInt32().PrimaryKey().Identity()
+                .WithColumn("answertext").AsCustom("VARCHAR(256)")
+                .WithColumn("iscorrect").AsBoolean()
+                .WithColumn("Question_id").AsInt32().ForeignKey("Questions", "id");
+
             Create.Table("role_users")
                 .WithColumn("user_id").AsInt32().ForeignKey("users", "id").OnDelete(Rule.Cascade)
                 .WithColumn("role_id").AsInt32().ForeignKey("roles", "id").OnDelete(Rule.Cascade);
+
         }
 
         public override void Down()
@@ -29,6 +48,9 @@ namespace UnipiForum.Migrations
             Delete.Table("role_users");
             Delete.Table("roles");
             Delete.Table("users");
+            Delete.Table("Questions");
+            Delete.Table("Tests");
+            Delete.Table("Answers");
         }
     }
 }

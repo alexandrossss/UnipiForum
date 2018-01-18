@@ -27,6 +27,9 @@ namespace UnipiForum
             var mapper = new ModelMapper();
             mapper.AddMapping<UserMap>();
             mapper.AddMapping<RoleMap>();
+            mapper.AddMapping<TestMap>();
+            mapper.AddMapping<QuestionMap>();
+            mapper.AddMapping<AnswerMap>();
 
             config.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
             
