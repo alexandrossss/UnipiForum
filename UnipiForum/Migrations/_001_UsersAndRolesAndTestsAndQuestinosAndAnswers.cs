@@ -4,7 +4,7 @@ using FluentMigrator;
 namespace UnipiForum.Migrations
 {
     [Migration(1)]
-    public class _001_UsersAndRoles : Migration
+    public class _001_UsersAndRolesAndTestsAndQuestinosAndAnswers : Migration
     {
         public override void Up()
         {
