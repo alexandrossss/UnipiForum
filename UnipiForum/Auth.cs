@@ -25,7 +25,7 @@ namespace UnipiForum
                 if (user == null)
                 {
                     
-                    using (var context = new unipiforumEntities3())
+                    using (var context = new unipiforumEntities4())
                     {
                         user = context.users.FirstOrDefault(u => u.username == HttpContext.Current.User.Identity.Name);
 
