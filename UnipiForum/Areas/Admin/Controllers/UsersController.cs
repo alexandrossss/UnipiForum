@@ -1,24 +1,24 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
- using System.Data.Entity;
- using System.Linq;
+using System.Data.Entity;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
- using NHibernate.Linq;
- using UnipiForum.Areas.Admin.ViewModels;
- using UnipiForum.Infrastructure;
- using UnipiForum.Models;
+using NHibernate.Linq;
+using UnipiForum.Areas.Admin.ViewModels;
+using UnipiForum.Infrastructure;
+using UnipiForum.Models;
 
 namespace UnipiForum.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     [SelectedTab("users")]
     public class UsersController : Controller
     {
         // GET: Admin/Users
         public ActionResult Index()
         {
-            using (var context = new unipiforumEntities2())
+            using (var context = new unipiforumEntities3())
             {
                 var _users = context.users;
 
@@ -35,7 +35,7 @@ namespace UnipiForum.Areas.Admin.Controllers
 
         public ActionResult New()
         {
-            using (var context = new unipiforumEntities2())
+            using (var context = new unipiforumEntities3())
             {
                 var _roles = context.roles;
                 return View(new UsersNew
@@ -55,11 +55,11 @@ namespace UnipiForum.Areas.Admin.Controllers
         public ActionResult New(UsersNew form)
         {
             var user = new user();
-            SyncRoles(form.Roles, user.Roles);
 
-            using (var context = new unipiforumEntities2())
+
+            using (var context = new unipiforumEntities3())
             {
-                var _users = context.users;
+                var _users = context.users.ToList();
 
                 if (_users.Any(u => u.username == form.Username))
 
@@ -68,78 +68,117 @@ namespace UnipiForum.Areas.Admin.Controllers
                 if (!ModelState.IsValid)
                     return View(form);
 
-                //user.user_id = form.Id;
+                user.user_id = form.User_Id;
                 user.email = form.Email;
                 user.username = form.Username;
-                user.SetPassword(form.Password);
+                user.password_hash = form.Password;
+
+
+                //SyncRoles(form.Roles.ToList(), user.roles.ToList());
+
+                //user.SetPassword(form.Password);
+                context.users.Add(user);
                 context.SaveChanges();
                 return RedirectToAction("index");
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int user_id)
         {
-            using (var context = new unipiforumEntities2())
+            using (var context = new unipiforumEntities3())
             {
-                var user = context.users.Find(id);
+                var user = context.users.Find(user_id);
                 //var user = Database.Session.Load<User>(id);
 
                 if (user == null)
                     return HttpNotFound();
-                
-                return View(new UsersEdit
+
+
+
+                var _roles = context.roles.ToList().Select(role => new RoleCheckbox
                 {
-                    //UserId = user.UserId,
+                    Id = role.role_id,
+                    IsChecked = user.role_users.Select(s=>s.role_id).Contains(role.role_id),
+                    Name = role.name
+                }).ToList();
+
+                return View(new UsersEdit()
+                {
+                    //UserID = user.user_id,
                     Username = user.username,
                     Email = user.email,
 
-                    Roles = context.roles.Select(role => new RoleCheckbox
-                    {
-                        Id = role.role_id,
-                        IsChecked = user.Roles.Contains(role),
-                        Name = role.name
-                    }).ToList()
-
-
-
+                    Roles = _roles
                 });
             }
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, UsersEdit form)
+        [HttpPost]
+        public ActionResult Edit(int user_id, UsersEdit form)
         {
-            using (var context = new unipiforumEntities2())
+            using (var context = new unipiforumEntities3())
             {
-
-
-                var user = context.users.Find(id);
+                //var user = context.users.Find(user_id);
+                var user = context.users.Include(t => t.role_users).SingleOrDefault(u => u.user_id == user_id);
                 if (user == null)
                     return HttpNotFound();
 
-                SyncRoles(form.Roles, user.Roles);
-
-                if (context.users.Any(u => u.username == form.Username && u.user_id != id))
+                if (context.users.ToList().Any(u => u.username == form.Username && u.user_id != user_id))
                     ModelState.AddModelError("Username", "Username must be unique");
 
                 if (!ModelState.IsValid)
                     return View(form);
 
-                //user.UserId = form.UserId;
-                user.username= form.Username;
+                var userDatabaseRoles = context.role_users.ToList()?.Where(s => s.user_id == user_id).ToList();
+                var rolesToBeDeleted = new List<int>();
+                var rolesToBeAdded = new List<int>();
+                foreach (var role in form.Roles)
+                {
+                    //If the role was not selected by the user
+                    if (!role.IsChecked)
+                    {
+                        //but it exists in the database, we must delete it
+                        if (userDatabaseRoles.FirstOrDefault(s => s.role_id == role.Id) != null)
+                        {
+                            rolesToBeDeleted.Add(role.Id);
+                        }
+                        //if it is not present in the database, we do nothing
+                    }
+                    else //if the role was selected by the user
+                    {
+                        //if the role does not exist in the database, we must add it
+                        if (userDatabaseRoles.FirstOrDefault(s => s.role_id == role.Id) == null)
+                        {
+                            rolesToBeAdded.Add(role.Id);
+                        }
+                    }
+                }
+                foreach (var roleToAdd in rolesToBeAdded)
+                {
+                    context.role_users.Add(new role_users()
+                    {
+                        role_id = roleToAdd,
+                        user_id = user_id
+                    });
+                }
+                foreach (var roleForDeletion in userDatabaseRoles.Where(r => rolesToBeDeleted.Contains(r.role_id)))
+                {
+                    context.role_users.Remove(roleForDeletion);
+                }
+                user.username = form.Username;
                 user.email = form.Email;
+
                 context.SaveChanges();
-                
 
                 return RedirectToAction("index");
             }
         }
 
-        public ActionResult ResetPassword(int id)
+        public ActionResult ResetPassword(int user_id)
         {
-            using (var context = new unipiforumEntities2())
+            using (var context = new unipiforumEntities3())
             {
-                var user = context.users.Find(id);
+                var user = context.users.Find(user_id);
                 if (user == null)
                     return HttpNotFound();
 
@@ -151,11 +190,11 @@ namespace UnipiForum.Areas.Admin.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(int id, UsersResetPassword form)
+        public ActionResult ResetPassword(int user_id, UsersResetPassword form)
         {
-            using (var context = new unipiforumEntities2())
+            using (var context = new unipiforumEntities3())
             {
-                var user = context.users.Find(id);
+                var user = context.users.Find(user_id);
                 if (user == null)
                     return HttpNotFound();
 
@@ -164,10 +203,11 @@ namespace UnipiForum.Areas.Admin.Controllers
                 if (!ModelState.IsValid)
                     return View(form);
 
-                user.SetPassword(form.Password);
+                user.password_hash = form.Password;
+                //user.SetPassword(form.Password);
 
                 context.SaveChanges();
-                
+
 
                 return RedirectToAction("index");
 
@@ -175,42 +215,46 @@ namespace UnipiForum.Areas.Admin.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int user_id)
         {
-            using (var context = new unipiforumEntities2())
+            using (var context = new unipiforumEntities3())
             {
 
-                var user = context.users.Find(id);
+                var user = context.users.Find(user_id);
                 if (user == null)
                     return HttpNotFound();
-
-                Database.Session.Delete(user);
+                context.users.Remove(user);                //Database.Session.Delete(user);
+                context.SaveChanges();
                 return RedirectToAction("index");
             }
         }
 
-        private void SyncRoles(IList<RoleCheckbox> checkboxes, IList<role> roles)
-        {
-            var selectedRoles = new List<role>();
-            using (var context = new unipiforumEntities2())
-            {
-                var _roles = context.roles;
-                foreach (var role in _roles)
-                {
-                    var checkbox = checkboxes.Single(c => c.Id == role.role_id);
-                    checkbox.Name = role.name;
+        //private void SyncRoles(ICollection<RoleCheckbox> checkboxes, ICollection<role> roles)
+        //{
 
-                    if (checkbox.IsChecked)
-                        selectedRoles.Add(role);
-                }
+        //    using (var context = new unipiforumEntities3())
+        //    {
 
-                foreach (var toadd in selectedRoles.Where(t => !roles.Contains(t)))
-                    roles.Add(toadd);
+        //        var selectedRoles = new List<role>();
+        //        var _roles = context.roles;
+        //        foreach (var role in _roles)
+        //        {
+        //            var checkbox = checkboxes.Single(c => c.Id == role.role_id);
+        //            checkbox.Name = role.name;
 
-                foreach (var toRemove in roles.Where(t => !selectedRoles.Contains(t)).ToList())
-                    roles.Remove(toRemove);
+        //            if (checkbox.IsChecked)
+        //                selectedRoles.Add(role);
+        //        }
 
-            }
-        }
+        //        foreach (var toadd in selectedRoles.Where(t => !roles.Contains(t)).ToList())
+        //            roles.Add(toadd);
+
+        //        foreach (var toRemove in roles.Where(t => !selectedRoles.Contains(t)).ToList())
+        //            roles.Remove(toRemove);
+
+
+
+        //    }
+        //}
     }
 }

@@ -26,26 +26,39 @@ namespace UnipiForum.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(AuthLogin form,string returnUrl)
+        public ActionResult Login(AuthLogin form, string returnUrl)
         {
-            var user = Database.Session.Query<User>().FirstOrDefault(u => u.Username == form.Username);
+            try
+            {
 
-            if (user == null)
-                UnipiForum.Models.User.FakeHash();
+        
+            using (var context = new unipiforumEntities3())
+            {
+                var user = context.users.FirstOrDefault(u => u.username == form.Username);
+                //var user = form.Username;
+                //if (user == null)
+                //    UnipiForum.Models.User.FakeHash();
 
-            if (user == null || !user.CheckPassword(form.Password))
-                ModelState.AddModelError("Username", "Username or password is incorrect");
+                if (user == null || user.password_hash !=form.Password)
+                    ModelState.AddModelError("Username", "Username or password is incorrect");
 
-            if (!ModelState.IsValid)
-                return View(form);
+                if (!ModelState.IsValid)
+                    return View(form);
 
-            FormsAuthentication.SetAuthCookie(form.Username,true);
+                FormsAuthentication.SetAuthCookie(form.Username, true);
 
-            if (!string.IsNullOrWhiteSpace(returnUrl))
-                return Redirect(returnUrl);
+                if (!string.IsNullOrWhiteSpace(returnUrl))
+                    return Redirect(returnUrl);
 
-            return RedirectToRoute("home");
+                return RedirectToRoute("home");
 
+            }
+            }
+            catch (Exception e)
+            {
+                
+                throw e;
+            }
         }
     }
 }

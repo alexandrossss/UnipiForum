@@ -12,7 +12,7 @@ namespace UnipiForum.Models
     public class Test
     {
         public virtual int Id { get; set; }
-        public virtual User User { get; set; }
+        public virtual user User { get; set; }
         public virtual string TestText { get; set; }
         public virtual int TestType  { get; set; }
         public virtual bool IsVisibleToOtherAdmins { get; set; }

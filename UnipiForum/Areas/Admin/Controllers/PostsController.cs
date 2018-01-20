@@ -7,7 +7,7 @@ using UnipiForum.Infrastructure;
 
 namespace UnipiForum.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     [SelectedTab("posts")]
     public class PostsController : Controller
     {

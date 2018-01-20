@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="unipiforumModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="unipiforumModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="role">
           <Key>
             <PropertyRef Name="role_id" />
@@ -12,15 +12,13 @@
           <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="128" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.unipiforum.role_users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="role_users">
           <Key>
-            <PropertyRef Name="user_id" />
-            <PropertyRef Name="role_id" />
+            <PropertyRef Name="Code" />
           </Key>
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -59,13 +57,8 @@ warning 6002: The table/view 'def.unipiforum.role_users' does not have a primary
         </Association>
         <EntityContainer Name="unipiforumModelStoreContainer">
           <EntitySet Name="role" EntityType="Self.role" Schema="unipiforum" store:Type="Tables" />
+          <EntitySet Name="role_users" EntityType="Self.role_users" Schema="unipiforum" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="unipiforum" store:Type="Tables" />
-          <EntitySet Name="role_users" EntityType="Self.role_users" store:Type="Tables" store:Schema="unipiforum">
-            <DefiningQuery>SELECT
-`role_users`.`user_id`, 
-`role_users`.`role_id`
-FROM `role_users` AS `role_users`</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="role_id" Association="Self.role_id">
             <End Role="role" EntitySet="role" />
             <End Role="role_users" EntitySet="role_users" />
@@ -75,7 +68,8 @@ FROM `role_users` AS `role_users`</DefiningQuery>
             <End Role="role_users" EntitySet="role_users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="unipiforumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -85,7 +79,17 @@ FROM `role_users` AS `role_users`</DefiningQuery>
           </Key>
           <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="users" Relationship="unipiforumModel.role_users" FromRole="role" ToRole="user" />
+          <NavigationProperty Name="role_users" Relationship="Self.role_id" FromRole="role" ToRole="role_users" />
+        </EntityType>
+        <EntityType Name="role_users">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="role" Relationship="Self.role_id" FromRole="role_users" ToRole="role" />
+          <NavigationProperty Name="user" Relationship="Self.user_id" FromRole="role_users" ToRole="user" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -95,31 +99,67 @@ FROM `role_users` AS `role_users`</DefiningQuery>
           <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="password_hash" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="roles" Relationship="unipiforumModel.role_users" FromRole="user" ToRole="role" />
+          <NavigationProperty Name="role_users" Relationship="Self.user_id" FromRole="user" ToRole="role_users" />
         </EntityType>
-        <EntityContainer Name="unipiforumEntities2" annotation:LazyLoadingEnabled="true">
+        <Association Name="role_id">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="role_users" Type="Self.role_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="role_users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_id">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="role_users" Type="Self.role_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="role_users">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="unipiforumEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="role_users" EntityType="Self.role_users" />
           <EntitySet Name="users" EntityType="Self.user" />
-          <AssociationSet Name="role_users" Association="unipiforumModel.role_users">
+          <AssociationSet Name="role_id" Association="Self.role_id">
             <End Role="role" EntitySet="roles" />
+            <End Role="role_users" EntitySet="role_users" />
+          </AssociationSet>
+          <AssociationSet Name="user_id" Association="Self.user_id">
             <End Role="user" EntitySet="users" />
+            <End Role="role_users" EntitySet="role_users" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="role_users">
-          <End Type="unipiforumModel.role" Role="role" Multiplicity="*" />
-          <End Type="unipiforumModel.user" Role="user" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="unipiforumModelStoreContainer" CdmEntityContainer="unipiforumEntities2">
+        <EntityContainerMapping StorageEntityContainer="unipiforumModelStoreContainer" CdmEntityContainer="unipiforumEntities3">
           <EntitySetMapping Name="roles">
             <EntityTypeMapping TypeName="unipiforumModel.role">
               <MappingFragment StoreEntitySet="role">
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role_users">
+            <EntityTypeMapping TypeName="unipiforumModel.role_users">
+              <MappingFragment StoreEntitySet="role_users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -133,14 +173,6 @@ FROM `role_users` AS `role_users`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="role_users" TypeName="unipiforumModel.role_users" StoreEntitySet="role_users">
-            <EndProperty Name="user">
-              <ScalarProperty Name="user_id" ColumnName="user_id" />
-            </EndProperty>
-            <EndProperty Name="role">
-              <ScalarProperty Name="role_id" ColumnName="role_id" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

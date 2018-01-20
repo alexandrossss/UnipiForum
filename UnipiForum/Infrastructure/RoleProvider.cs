@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using UnipiForum.Models;
 
 namespace UnipiForum.Infrastructure
 {
@@ -12,11 +13,15 @@ namespace UnipiForum.Infrastructure
             throw new NotImplementedException();
         }
 
+      
+
         public override string[] GetRolesForUser(string username)
         {
-
-            return Auth.User.Roles.Select(role => role.Name).ToArray();
-
+            using (var context = new unipiforumEntities3())
+            {
+                //return Auth.User.roles.Select(role => role.name).ToArray();
+                return null;
+            }
         }
 
         public override void CreateRole(string roleName)

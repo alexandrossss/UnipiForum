@@ -13,10 +13,10 @@ namespace UnipiForum.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class unipiforumEntities2 : DbContext
+    public partial class unipiforumEntities3 : DbContext
     {
-        public unipiforumEntities2()
-            : base("name=unipiforumEntities2")
+        public unipiforumEntities3()
+            : base("name=unipiforumEntities3")
         {
         }
     
@@ -26,6 +26,7 @@ namespace UnipiForum.Models
         }
     
         public DbSet<role> roles { get; set; }
+        public DbSet<role_users> role_users { get; set; }
         public DbSet<user> users { get; set; }
     }
 }

@@ -1,36 +1,37 @@
 ﻿
 
 <!DOCTYPE html>
-<html>   
+<html>
 <head>
     <title>@ViewBag.title - Simple Blog </title>
     @Styles.Render("~/styles")
 </head>
 <body>
-<header>
-    @Html.ActionLink("UNIPI FORUM","About","Home") 
-    
-    <a href="@Url.RouteUrl("Home" )">Simple Blog</a>
-    <i class="glyphicon glyphicon-bell"></i>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <p>Welcome back, @User.Identity.Name</p>
-        <a href="@Url.RouteUrl("logout")">Logout</a>
+    <header>
+        @Html.ActionLink("UNIPI FORUM", "About", "Home")
 
-        if (User.IsInRole("admin"))
+        <a href="@Url.RouteUrl("Home" )">Simple Blog</a>
+        <i class="glyphicon glyphicon-bell"></i>
+        @if (User.Identity.IsAuthenticated)
         {
-            <a href="@Url.Action("Index","Posts",new {area="admin"})">View posts in admin</a>
+            <p>Welcome back, @User.Identity.Name</p>
+            <a href="@Url.RouteUrl("logout")">Logout</a>
+            <a href="@Url.Action("Index", "Posts", new { area = "admin" })">View posts in admin</a>
         }
-    }
-    else
-    {
-        <a href="@Url.RouteUrl("login")">Login</a>
-    }
-</header>
-@RenderBody()
+        @*if (User.IsInRole("admin"))
+                {
+                    <a href="@Url.Action("Index","Posts",new {area="admin"})">View posts in admin</a>
+            }
+            }
+            else
+            {
+                <a href="@Url.RouteUrl("login")">Login</a>
+            }*@
+    </header>
+    @RenderBody()
 
     @Scripts.Render("~/scripts")
-    @RenderSection("Scripts",false)
+    @RenderSection("Scripts", false)
 
 </body>
 </html>

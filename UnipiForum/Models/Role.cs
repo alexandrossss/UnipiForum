@@ -16,12 +16,12 @@ namespace UnipiForum.Models
     {
         public role()
         {
-            this.users = new HashSet<user>();
+            this.role_users = new HashSet<role_users>();
         }
     
         public int role_id { get; set; }
         public string name { get; set; }
     
-        public virtual ICollection<user> users { get; set; }
+        public virtual ICollection<role_users> role_users { get; set; }
     }
 }

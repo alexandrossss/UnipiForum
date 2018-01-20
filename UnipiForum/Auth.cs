@@ -14,22 +14,28 @@ namespace UnipiForum
     {
         private const string UserKey = "UnipiForum.Auth.UserKey";
 
-        public static User User
+        public static user User
         {
             get
             {
                 if (!HttpContext.Current.User.Identity.IsAuthenticated)
                     return null;
 
-                var user = HttpContext.Current.Items[UserKey] as User;
+                var user = HttpContext.Current.Items[UserKey] as user;
                 if (user == null)
                 {
-                    user = Database.Session.Query<User>().FirstOrDefault(u => u.Username == HttpContext.Current.User.Identity.Name);
+                    
+                    using (var context = new unipiforumEntities3())
+                    {
+                        user = context.users.FirstOrDefault(u => u.username == HttpContext.Current.User.Identity.Name);
 
-                    if (user == null)
-                        return null;
-                    HttpContext.Current.Items[UserKey] = user;
+                        if (user == null)
+                            return null;
+                        HttpContext.Current.Items[UserKey] = user;
+                    }
+                    
                 }
+
                 return user;
             }
         }
