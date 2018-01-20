@@ -17,7 +17,7 @@ namespace UnipiForum.Infrastructure
 
         public override string[] GetRolesForUser(string username)
         {
-            using (var context = new unipiforumEntities4())
+            using (var context = new unipiforumEntities3())
             {
                 //return Auth.User.roles.Select(role => role.name).ToArray();
                 return null;
