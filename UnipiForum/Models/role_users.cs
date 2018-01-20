@@ -12,18 +12,13 @@ namespace UnipiForum.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class role_users
     {
-        public user()
-        {
-            this.role_users = new HashSet<role_users>();
-        }
-    
         public int user_id { get; set; }
-        public string username { get; set; }
-        public string email { get; set; }
-        public string password_hash { get; set; }
+        public int role_id { get; set; }
+        public int Code { get; set; }
     
-        public virtual ICollection<role_users> role_users { get; set; }
+        public virtual role role { get; set; }
+        public virtual user user { get; set; }
     }
 }

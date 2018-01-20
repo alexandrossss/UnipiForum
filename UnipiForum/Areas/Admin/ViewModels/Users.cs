@@ -13,7 +13,7 @@ namespace UnipiForum.Areas.Admin.ViewModels
     }
     public class UsersIndex
     {
-        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<user> Users { get; set; }
     }
 
     public class UsersNew
@@ -21,8 +21,8 @@ namespace UnipiForum.Areas.Admin.ViewModels
 
         public IList<RoleCheckbox> Roles { get; set; }
 
-        [Required, MaxLength(128)]
-        public string UserId { get; set; }
+        [Required]
+        public int User_Id { get; set; }
         [Required, MaxLength(128)]
         public string Username { get; set; }
         [Required, DataType(DataType.Password)]
@@ -34,8 +34,8 @@ namespace UnipiForum.Areas.Admin.ViewModels
     {
 
         public IList<RoleCheckbox> Roles { get; set; }
-        [Required, MaxLength(128)]
-        public string UserId{ get; set; }
+      // [Required]
+        //public int UserId{ get; set; }
         [Required, MaxLength(128)]
         public string Username { get; set; }
 
