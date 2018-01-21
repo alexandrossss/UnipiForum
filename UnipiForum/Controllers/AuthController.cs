@@ -1,64 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
-using NHibernate.Linq;
-using UnipiForum.Models;
-using UnipiForum.ViewModels;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Web;
+//using System.Web.Mvc;
+//using System.Web.Security;
+//using NHibernate.Linq;
+//using UnipiForum.Models;
+//using UnipiForum.ViewModels;
 
-namespace UnipiForum.Controllers
-{
-    public class AuthController : Controller
-    {
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToRoute("home");
-        }
-        // GET: Auth
-        public ActionResult Login()
-        {
-            return View(new AuthLogin
-            {
-            });
-        }
+//namespace UnipiForum.Controllers
+//{
+//    public class AuthController : Controller
+//    {
+//        public ActionResult Logout()
+//        {
+//            FormsAuthentication.SignOut();
+//            return RedirectToRoute("home");
+//        }
+//        // GET: Auth
+//        public ActionResult Login()
+//        {
+//            return View(new AuthLogin
+//            {
+//            });
+//        }
 
-        [HttpPost]
-        public ActionResult Login(AuthLogin form, string returnUrl)
-        {
-            try
-            {
+//        [HttpPost]
+//        public ActionResult Login(AuthLogin form, string returnUrl)
+//        {
+//            try
+//            {
 
         
-            using (var context = new unipiforumEntities3())
-            {
-                var user = context.users.FirstOrDefault(u => u.username == form.Username);
-                //var user = form.Username;
-                //if (user == null)
-                //    UnipiForum.Models.User.FakeHash();
+//            using (var context = new unipiforumEntities3())
+//            {
+//                var user = context.users.FirstOrDefault(u => u.username == form.Username);
+//                //var user = form.Username;
+//                //if (user == null)
+//                //    UnipiForum.Models.User.FakeHash();
 
-                if (user == null || user.password_hash !=form.Password)
-                    ModelState.AddModelError("Username", "Username or password is incorrect");
+//                if (user == null || user.password_hash !=form.Password)
+//                    ModelState.AddModelError("Username", "Username or password is incorrect");
 
-                if (!ModelState.IsValid)
-                    return View(form);
+//                if (!ModelState.IsValid)
+//                    return View(form);
 
-                FormsAuthentication.SetAuthCookie(form.Username, true);
+//                FormsAuthentication.SetAuthCookie(form.Username, true);
 
-                if (!string.IsNullOrWhiteSpace(returnUrl))
-                    return Redirect(returnUrl);
+//                if (!string.IsNullOrWhiteSpace(returnUrl))
+//                    return Redirect(returnUrl);
 
-                return RedirectToRoute("home");
+//                return RedirectToRoute("home");
 
-            }
-            }
-            catch (Exception e)
-            {
+//            }
+//            }
+//            catch (Exception e)
+//            {
                 
-                throw e;
-            }
-        }
-    }
-}
+//                throw e;
+//            }
+//        }
+//    }
+//}
