@@ -3,20 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.title - Simple Blog </title>
+    <title>@ViewBag.title - Unipi Forum </title>
     @Styles.Render("~/styles")
 </head>
 <body>
     <header>
         @Html.ActionLink("UNIPI FORUM", "About", "Home")
 
-        <a href="@Url.RouteUrl("Home" )">Simple Blog</a>
+        <a href="@Url.RouteUrl("Home" )">Unipi Forum </a>
         <i class="glyphicon glyphicon-bell"></i>
         @if (User.Identity.IsAuthenticated)
         {
             <p>Welcome back, @User.Identity.Name</p>
             <a href="@Url.RouteUrl("logout")">Logout</a>
-            <a href="@Url.Action("Index", "Posts", new { area = "admin" })">View posts in admin</a>
+            <a href="@Url.Action("Index", "Tests", new { area = "admin" })">View posts in admin</a>
         }
         @*if (User.IsInRole("admin"))
                 {

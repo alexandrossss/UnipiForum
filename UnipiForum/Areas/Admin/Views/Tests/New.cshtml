@@ -1,0 +1,59 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@model UnipiForum.Areas.Admin.ViewModels.TestsNew
+@using UnipiForum.Areas.Admin.ViewModels
+<h1>New Test</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(f => f.TestText)
+        @Html.TextBoxFor(f => f.TestText, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.EnumDropDownListFor(m => m.TestType, new { @class = "form-control" })
+
+    </div>
+    <div><input type="button" id="new-question-button" class="btn btn-primary add-question-button" value="Add Question"></div>
+    <div class="panel panel-body">
+        
+        <ul class="nav nav-pills">
+            <li> Question:</li>
+            
+            <li class="pull-right"> @Html.EnumDropDownListFor(m => m.Difficulty, new { @class = "form-control" })</li>
+            <li class="pull-right"> Difficulty:</li>
+        </ul>
+        <input id="new-question-name" type="text" class="new-question-name form-control" />
+
+
+        <br />
+
+        <div class="question" style="position:relative;left:20%;width:80%;">
+            <ul class="nav nav-pills">
+                <li> <div class=" panel-heading">Answers:</div></li>
+                <li class="pull-right"><button disabled class="btn btn-primary add-answer-button">Add Answer</button></li>
+            </ul>
+
+            <ul class="nav nav-pills">
+                <li style="position:relative; width:85%;"><input id="new-answer-name" type="text" class="new-answer-name form-control" /></li>
+                <li class="pull-right"> <input type="checkbox" /> Is Correct </li>
+
+            </ul>
+            <br />
+            <ul class="nav nav-pills">
+                <li style="position:relative; width:85%;"><input id="new-answer-name" type="text" class="new-answer-name form-control" /></li>
+                <li class="pull-right"> <input type="checkbox"/> Is Correct </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <input type="submit" value="Save Test" class="btn btn-primary" />
+    <a href="@Url.Action("Index")">or cancel</a>
+}
+

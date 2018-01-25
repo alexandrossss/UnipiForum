@@ -17,7 +17,7 @@
 
 //        public override string[] GetRolesForUser(string username)
 //        {
-//            using (var context = new unipiforumEntities3())
+//            using (var context = new unipiforumSQLEntities())
 //            {
 //                //return Auth.User.roles.Select(role => role.name).ToArray();
 //                return null;

@@ -2,7 +2,7 @@
 
     $("a[data-post]").click(function (e) {
         e.preventDefault();
-
+        debugger;
         var $this = $(this);
         var messege = $this.data("post");
 
