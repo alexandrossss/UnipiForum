@@ -1,0 +1,63 @@
+﻿@using Microsoft.Ajax.Utilities
+@model UnipiForum.ViewModels.DoATest
+
+<h1>now you must see your first test</h1>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+        @Model.Test_Text
+    </div>
+
+    <div >
+        @*<div class="panel-heading">Questions</div>*@
+        <div class="panel-body">
+            @{ var cnt = 1;}
+            @foreach (var question in Model.Questions)
+            {
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ouestion: @cnt</div>
+                    @{ cnt = cnt + 1;}
+                    <div class="panel-body"> @question.Question_Text</div>
+
+                    <div class="panel panel-default" style="width: 98%; margin: 1%;">
+                        <div class="panel-heading">Answers</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="width: 98%; margin: 1%;">
+                                @for (int i = 0; i < Model.Answers.Count(e => e.Question_ID == question.Question_ID); i++)
+                                {
+
+                                    <li class="list-group-item">
+                                        @Html.Hidden("Answers[" + i + "].Answer_ID", Model.Answers[i].Answer_ID)
+                                        <label for="Answers@(i)__Ischecked">
+                                            @Html.CheckBox("Answers[" + i + "].Is_Correct", Model.Answers[i].Is_Correct)
+                                            @Model.Answers[i].Answer_Text
+                                        </label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(f => f.Test_ID)
+        @Html.TextBoxFor(f => f.Test_ID, new { @class = "form-control" })
+    </div>
+
+
+
+}

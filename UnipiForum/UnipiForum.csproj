@@ -185,6 +185,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Tests.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
+    <Compile Include="Controllers\UserTestsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -233,6 +234,7 @@
       <DependentUpon>unipioforumSQL.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\UserTests.cs" />
     <Compile Include="ViewModels\Auth.cs" />
     <Compile Include="Database.cs" />
   </ItemGroup>
@@ -337,6 +339,7 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Tools\DeployDb-Dev.bat" />
+    <Content Include="Views\UserTests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

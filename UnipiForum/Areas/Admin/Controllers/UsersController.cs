@@ -73,8 +73,28 @@ namespace UnipiForum.Areas.Admin.Controllers
                 user.username = form.Username;
                 user.password_hash = form.Password;
 
+                var userDatabaseRoles = context.role_users.ToList();
+                var rolesToBeAdded = new List<int>();
+                foreach (var role in form.Roles)
+                {
+                    //If the role was not selected by the user
+                    if (role.IsChecked)
+                    {
+                        
+                        
+                            rolesToBeAdded.Add(role.Id);
+                        
+                    }
+                }
 
-                //SyncRoles(form.Roles.ToList(), user.roles.ToList());
+                foreach (var roleToAdd in rolesToBeAdded)
+                {
+                    context.role_users.Add(new role_users()
+                    {
+                        role_id = roleToAdd,
+                        user_id = user.user_id
+                    });
+                }
 
                 //user.SetPassword(form.Password);
                 context.users.Add(user);

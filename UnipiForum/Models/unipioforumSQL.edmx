@@ -10,7 +10,7 @@
             <PropertyRef Name="answer_id" />
           </Key>
           <Property Name="answer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="answer_test" Type="varchar(max)" />
+          <Property Name="answer_text" Type="varchar(max)" />
           <Property Name="question_id" Type="int" />
           <Property Name="is_correct" Type="bit" />
         </EntityType>
@@ -21,6 +21,7 @@
           <Property Name="question_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="question_text" Type="varchar(max)" />
           <Property Name="test_id" Type="int" />
+          <Property Name="question_difficulty" Type="int" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -258,10 +259,10 @@ warning 6002: The table/view 'unipiforumSQL.sys.database_firewall_rules' does no
             <PropertyRef Name="answer_id" />
           </Key>
           <Property Name="answer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="answer_test" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="question_id" Type="Int32" />
           <NavigationProperty Name="question" Relationship="unipiforumSQLModel.FK_answer_Toquestion" FromRole="answer" ToRole="question" />
           <Property Name="is_correct" Type="Boolean" />
+          <Property Name="answer_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="question">
           <Key>
@@ -272,6 +273,7 @@ warning 6002: The table/view 'unipiforumSQL.sys.database_firewall_rules' does no
           <Property Name="test_id" Type="Int32" />
           <NavigationProperty Name="answers" Relationship="unipiforumSQLModel.FK_answer_Toquestion" FromRole="question" ToRole="answer" />
           <NavigationProperty Name="test" Relationship="unipiforumSQLModel.FK_Table_ToTest" FromRole="question" ToRole="test" />
+          <Property Name="question_difficulty" Type="Int32" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -355,9 +357,9 @@ warning 6002: The table/view 'unipiforumSQL.sys.database_firewall_rules' does no
           <EntitySetMapping Name="answers">
             <EntityTypeMapping TypeName="unipiforumSQLModel.answer">
               <MappingFragment StoreEntitySet="answer">
+                <ScalarProperty Name="answer_text" ColumnName="answer_text" />
                 <ScalarProperty Name="is_correct" ColumnName="is_correct" />
                 <ScalarProperty Name="question_id" ColumnName="question_id" />
-                <ScalarProperty Name="answer_test" ColumnName="answer_test" />
                 <ScalarProperty Name="answer_id" ColumnName="answer_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -365,6 +367,7 @@ warning 6002: The table/view 'unipiforumSQL.sys.database_firewall_rules' does no
           <EntitySetMapping Name="questions">
             <EntityTypeMapping TypeName="unipiforumSQLModel.question">
               <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="question_difficulty" ColumnName="question_difficulty" />
                 <ScalarProperty Name="test_id" ColumnName="test_id" />
                 <ScalarProperty Name="question_text" ColumnName="question_text" />
                 <ScalarProperty Name="question_id" ColumnName="question_id" />

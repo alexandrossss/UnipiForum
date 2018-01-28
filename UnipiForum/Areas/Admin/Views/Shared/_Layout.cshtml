@@ -14,13 +14,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Blog Admin</title>
+    <title>Unipi Forum Admin</title>
     @Styles.Render("~/admin/styles")
 </head>
 <body>
     <div class="container">
         <ul class="nav nav-pills">
-            <li class="@(SelectedTabClass("posts"))">
+            <li class="@(SelectedTabClass("tests"))">
                 @Html.ActionLink("Tests", "Index", "Tests", new { area = "admin" }, new { })
             </li>
             <li class="@(SelectedTabClass("users"))">
@@ -32,7 +32,6 @@
         </ul>
         @RenderBody()
     </div>
-    @*@BundleTable.Bundles*@
     @Scripts.Render("~/admin/scripts")
     @RenderSection("Scripts",false)
     

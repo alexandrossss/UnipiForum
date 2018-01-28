@@ -15,9 +15,9 @@ namespace UnipiForum.Models
     public partial class answer
     {
         public int answer_id { get; set; }
-        public string answer_test { get; set; }
         public Nullable<int> question_id { get; set; }
         public Nullable<bool> is_correct { get; set; }
+        public string answer_text { get; set; }
     
         public virtual question question { get; set; }
     }

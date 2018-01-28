@@ -7,17 +7,20 @@
     @Styles.Render("~/styles")
 </head>
 <body>
-    <header>
-        @Html.ActionLink("UNIPI FORUM", "About", "Home")
+<header>
+    @Html.ActionLink("UNIPI FORUM", "About", "Home")
 
-        <a href="@Url.RouteUrl("Home" )">Unipi Forum </a>
-        <i class="glyphicon glyphicon-bell"></i>
-        @if (User.Identity.IsAuthenticated)
-        {
-            <p>Welcome back, @User.Identity.Name</p>
-            <a href="@Url.RouteUrl("logout")">Logout</a>
-            <a href="@Url.Action("Index", "Tests", new { area = "admin" })">View posts in admin</a>
-        }
+    <a href="@Url.RouteUrl("Home" )">Unipi Forum </a>
+    <i class="glyphicon glyphicon-bell"></i>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Welcome back, @User.Identity.Name</p>
+        <a href="@Url.RouteUrl("logout")">Logout</a>
+
+        <a href="@Url.Action("Index", "Tests", new { area = "admin" })">View posts in admin</a>
+           
+        <a href="@Url.RouteUrl("UserTests")">Do a Test TEST :P</a>
+    }
         @*if (User.IsInRole("admin"))
                 {
                     <a href="@Url.Action("Index","Posts",new {area="admin"})">View posts in admin</a>
@@ -28,8 +31,9 @@
                 <a href="@Url.RouteUrl("login")">Login</a>
             }*@
     </header>
+<div class="container">
     @RenderBody()
-
+</div>
     @Scripts.Render("~/scripts")
     @RenderSection("Scripts", false)
 
