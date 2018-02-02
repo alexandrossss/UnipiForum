@@ -22,7 +22,7 @@ namespace UnipiForum.Models
     
         public int test_id { get; set; }
         public string test_text { get; set; }
-        public Nullable<int> test_type { get; set; }
+        public int test_type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<question> questions { get; set; }

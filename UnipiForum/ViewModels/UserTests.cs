@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using UnipiForum.Models;
 
 namespace UnipiForum.ViewModels
 {
@@ -12,18 +13,30 @@ namespace UnipiForum.ViewModels
 
         public int Answer_ID { get; set; }
         public int? Question_ID { get; set; }
-        public bool? Is_Correct { get; set; }
         public string Answer_Text { get; set; }
+        public bool User_Answer { get; set; }
+        public bool Is_Correct { get; set; }
 
     }
     public class Question
     {
         public int Question_ID { get; set; }
-        public int? Test_ID { get; set; }
+        public int Test_ID { get; set; }
         public int? Question_Difficulty { get; set; }
         public string Question_Text { get; set; }
 
     }
+
+
+    public class NewQuestions
+    {
+        public int Question_ID { get; set; }
+        public int? Test_ID { get; set; }
+        public int? Question_Difficulty { get; set; }
+        public string Question_Text { get; set; }
+        public List<AnswersRadioButton> Answers_List { get; set; }
+    }
+
     public enum TestTypes
     {
         [Display(Name = "Sign Up")]
@@ -42,8 +55,9 @@ namespace UnipiForum.ViewModels
     {
         public int Test_ID { get; set; }
         public string Test_Text { get; set; }
-        public IList<Question> Questions { get; set; }
-        public IList<AnswersRadioButton> Answers { get; set; }
+        public IList<NewQuestions> Questions { get; set; }
+       // public IList<AnswersRadioButton> Answers { get; set; }
 
     }
+
 }

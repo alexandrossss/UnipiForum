@@ -22,8 +22,8 @@ namespace UnipiForum.Models
     
         public int question_id { get; set; }
         public string question_text { get; set; }
-        public Nullable<int> test_id { get; set; }
-        public Nullable<int> question_difficulty { get; set; }
+        public int test_id { get; set; }
+        public int question_difficulty { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<answer> answers { get; set; }

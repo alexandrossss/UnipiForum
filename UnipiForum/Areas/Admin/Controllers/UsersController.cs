@@ -18,7 +18,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var _users = context.users.Include(t => t.role_users.Select(ru=>ru.role)).ToList();
 
@@ -35,7 +35,7 @@ namespace UnipiForum.Areas.Admin.Controllers
 
         public ActionResult New()
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var _roles = context.roles;
                 return View(new UsersNew
@@ -57,7 +57,7 @@ namespace UnipiForum.Areas.Admin.Controllers
             var user = new user();
 
 
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var _users = context.users.ToList();
 
@@ -105,7 +105,7 @@ namespace UnipiForum.Areas.Admin.Controllers
 
         public ActionResult Edit(int user_id)
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var user = context.users.Find(user_id);
                 //var user = Database.Session.Load<User>(id);
@@ -136,7 +136,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int user_id, UsersEdit form)
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 //var user = context.users.Find(user_id);
                 var user = context.users.Include(t => t.role_users).SingleOrDefault(u => u.user_id == user_id);
@@ -196,7 +196,7 @@ namespace UnipiForum.Areas.Admin.Controllers
 
         public ActionResult ResetPassword(int user_id)
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var user = context.users.Find(user_id);
                 if (user == null)
@@ -212,7 +212,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult ResetPassword(int user_id, UsersResetPassword form)
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var user = context.users.Find(user_id);
                 if (user == null)
@@ -237,7 +237,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Delete(int user_id)
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
 
                 var user = context.users.Find(user_id);

@@ -13,10 +13,10 @@ namespace UnipiForum.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class unipiforumSQLEntities1 : DbContext
+    public partial class unipiforumSQLEntities2 : DbContext
     {
-        public unipiforumSQLEntities1()
-            : base("name=unipiforumSQLEntities1")
+        public unipiforumSQLEntities2()
+            : base("name=unipiforumSQLEntities2")
         {
         }
     
@@ -25,12 +25,11 @@ namespace UnipiForum.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<role> roles { get; set; }
-        public virtual DbSet<role_users> role_users { get; set; }
-        public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
         public virtual DbSet<answer> answers { get; set; }
         public virtual DbSet<question> questions { get; set; }
+        public virtual DbSet<role> roles { get; set; }
+        public virtual DbSet<role_users> role_users { get; set; }
         public virtual DbSet<test> tests { get; set; }
+        public virtual DbSet<user> users { get; set; }
     }
 }

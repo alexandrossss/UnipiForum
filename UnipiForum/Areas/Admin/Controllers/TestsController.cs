@@ -16,7 +16,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         // GET: Admin/Posts
         public ActionResult Index()
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var _tests = context.tests;
                     //Include(t => t.role_users.Select(ru => ru.role)).ToList();
@@ -34,7 +34,7 @@ namespace UnipiForum.Areas.Admin.Controllers
 
         public ActionResult New()
         {
-            using (var context = new unipiforumSQLEntities1())
+            using (var context = new unipiforumSQLEntities2())
             {
                 var _tests = context.tests;
                 return View(new TestsNew
@@ -51,7 +51,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         //    var test = new test();
 
 
-        //    using (var context = new unipiforumSQLEntities1())
+        //    using (var context = new unipiforumSQLEntities2())
         //    {
         //        var _tests = context.tests.ToList();
 

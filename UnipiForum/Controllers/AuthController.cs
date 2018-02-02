@@ -32,7 +32,7 @@ namespace UnipiForum.Controllers
             {
 
 
-                using (var context = new unipiforumSQLEntities1())
+                using (var context = new unipiforumSQLEntities2())
                 {
                     var user = context.users.FirstOrDefault(u => u.username == form.Username);
                     //var user = form.Username;

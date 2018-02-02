@@ -4,18 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="58babd77ab23447b8982c26698242d25" Name="Diagram1">
+      <Diagram DiagramId="3580849afb4c4ded8f86364fa2f7cbad" Name="Diagram1">
+        <EntityTypeShape EntityType="unipiforumSQLModel.answer" Width="1.5" PointX="7.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="unipiforumSQLModel.question" Width="1.5" PointX="5" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="unipiforumSQLModel.role" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="unipiforumSQLModel.role_users" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="unipiforumSQLModel.test" Width="1.5" PointX="2.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="unipiforumSQLModel.user" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="unipiforumSQLModel.database_firewall_rules" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="unipiforumSQLModel.FK_answer_Toquestion" ManuallyRouted="false" />
+        <AssociationConnector Association="unipiforumSQLModel.FK_Table_ToTest" ManuallyRouted="false" />
         <AssociationConnector Association="unipiforumSQLModel.FK_role_users_Torole" ManuallyRouted="false" />
         <AssociationConnector Association="unipiforumSQLModel.FK_role_users_Touser" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="unipiforumSQLModel.answer" Width="1.5" PointX="9.875" PointY="1" />
-        <EntityTypeShape EntityType="unipiforumSQLModel.question" Width="1.5" PointX="7.625" PointY="0.875" />
-        <EntityTypeShape EntityType="unipiforumSQLModel.test" Width="1.5" PointX="5.375" PointY="1" />
-        <AssociationConnector Association="unipiforumSQLModel.FK_answer_Toquestion" />
-        <AssociationConnector Association="unipiforumSQLModel.FK_Table_ToTest" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
