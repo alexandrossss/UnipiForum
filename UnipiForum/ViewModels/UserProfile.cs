@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Microsoft.ApplicationInsights.Web;
+using UnipiForum.Models;
 
 namespace UnipiForum.ViewModels
 {
@@ -17,6 +19,19 @@ namespace UnipiForum.ViewModels
         public string Password { get; set; }
         [Required, MaxLength(256), DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+    }
+
+    public class MyProfileViewModel
+    {
+        public user Users { get; set; }
+
+
+    }
+
+    public class ResultsViewModel
+    {
+        public IEnumerable<result> Results { get; set; }
 
     }
 }

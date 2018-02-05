@@ -1,0 +1,82 @@
+﻿
+@model UnipiForum.ViewModels.ResultsViewModel
+
+
+<h1>Here is your test results</h1>
+
+@helper SelectedTabClass(string tabName)
+    {
+        if (tabName == ViewBag.SelectedTab)
+        {
+            @: active
+        }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unipi Forum Admin</title>
+    @Styles.Render("~/styles")
+</head>
+<body>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="@(SelectedTabClass("myprofilepage"))">
+                @Html.ActionLink("My Profile", "MyProfilePage", "UserProfile", new { })
+            </li>
+            <li class="@(SelectedTabClass("results"))">
+                @Html.ActionLink("Results", "Results", "UserProfile", new { })
+            </li>
+        </ul>
+
+    </div>
+
+    <form class="Hidden" id="anti-forgery-form">
+        @Html.AntiForgeryToken()
+    </form>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Test</th>
+        <th>Question</th>
+        <th>Answer</th>
+        @*<th>roles</th>
+        <th>Actions</th>*@
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var res in Model.Results)
+    {
+        <tr>
+            <td>@res.test_text</td>
+            <td>@res.question_text</td>
+            <td>@res.answer_text</td>
+            @*<td>@string.Join(", ", user.role_users.Select(role_user => role_user.role.name))</td>*@
+            @*<td>@string.Join(", ",user.roles.Select(role => role.name))</td>*@
+            @*<td>
+                <div class="btn-group">
+                    <a href="@Url.Action("edit",new {user.user_id})" class="btn btn-xs btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        Edit
+                    </a>
+                    <a href="@Url.Action("resetpassword",new{user.user_id})" class="btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-lock"></i>
+                        Reset Password
+                    </a>
+                    <a href="@Url.Action("delete",new{user.user_id})" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete this @user.username?">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        Delete
+                    </a>
+
+                </div>
+            </td>*@
+
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+</body>
+</html>
+

@@ -1,5 +1,13 @@
-﻿
-
+﻿@{
+    Layout = null;
+}
+@helper SelectedTabClass(string tabName)
+    {
+        if (tabName == ViewBag.SelectedTab)
+        {
+            @: active
+        }
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,32 +16,57 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            @Html.ActionLink("UNIPI FORUM", "About", "Home")
-
-            <a href="@Url.RouteUrl("Home" )">Unipi Forum </a>
-            <i class="glyphicon glyphicon-bell"></i>
+        <ul class="nav nav-pills">
+            <li>
+                <a href="@Url.RouteUrl("Home")">Unipi Forum </a>
+            </li>
             @if (User.Identity.IsAuthenticated)
             {
-                <p>Welcome back, @User.Identity.Name</p>
-                <a href="@Url.RouteUrl("logout")">Logout</a>
 
-                @*<a href="@Url.Action("Index", "Tests", new { area = "admin" })">View posts in admin</a>*@
-
-                <a href="@Url.RouteUrl("UserTests")">Do a Test TEST :P</a>
-                <a href="@Url.RouteUrl("UserProfile")">Sign Up </a>
-
-                if (User.IsInRole("admin"))
-                {
-                    <a href="@Url.Action("Index","Posts",new {area="admin"})">View posts in admin</a>
-                }
+                <li class="pull-right">
+                    <a href="@Url.RouteUrl("logout")">Logout</a>
+                </li>
+                <li class="pull-right">
+                    <a href="@Url.Action("Index", "Tests", new {area = "admin"})">Go to Admin Page</a>
+                </li>
+                <li class="pull-right">
+                    <a href="@Url.RouteUrl("UserProfile")">Go to My Profile </a>
+                </li>
             }
             else
             {
-                <a href="@Url.RouteUrl("login")">Login</a>
+                <li class="pull-right">
+                    <a href="@Url.RouteUrl("login")">Login</a>
+                </li>
+                <li class="pull-right">
+                    <a href="@Url.RouteUrl("NewUserProfile")">Sign Up </a>
+                </li>
             }
-        </header>
 
+        </ul>
+    </div>
+    <div class="container">
+        <header>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p>Welcome back, @User.Identity.Name</p>
+
+
+                <a href="@Url.RouteUrl("UserTests")">Do a Test TEST :P</a>
+
+            }
+            @*if (User.IsInRole("admin"))
+                    {
+                        <a href="@Url.Action("Index","Posts",new {area="admin"})">View posts in admin</a>
+                }
+                }
+                else
+                {
+                    <a href="@Url.RouteUrl("login")">Login</a>
+                }*@
+        </header>
+        <br/>
+        <br/>
         @RenderBody()
     </div>
     @Scripts.Render("~/scripts")

@@ -43,7 +43,8 @@
                                     @Html.Hidden("Questions[" + j + "].Answers_List[" + i + "].Answer_ID", quest.Answers_List[i].Answer_ID)
                                     @Html.Hidden("Questions[" + j + "].Question_ID", quest.Question_ID)
                                     @Html.Hidden("Questions[" + j + "].Question_Difficulty", quest.Question_Difficulty)
-
+                                    @Html.Hidden("Questions[" + j + "].Question_Text", quest.Question_Text)
+                                    @Html.Hidden("Questions[" + j + "].Answers_List[" + i + "].Answer_Text", quest.Answers_List[i].Answer_Text)
 
                                     <label for="Answers@(i)__Ischecked">
                                         @Html.CheckBox("Questions[" + j + "].Answers_List[" + i + "].User_Answer", quest.Answers_List[i].User_Answer)

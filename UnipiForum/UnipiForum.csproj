@@ -219,6 +219,9 @@
     <Compile Include="Models\question.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\result.cs">
+      <DependentUpon>DBs Connection.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\role.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
@@ -340,6 +343,8 @@
     <Content Include="Tools\DeployDb-Dev.bat" />
     <Content Include="Views\UserTests\Index.cshtml" />
     <Content Include="Views\UserProfile\NewUser.cshtml" />
+    <Content Include="Views\UserProfile\MyProfilePage.cshtml" />
+    <Content Include="Views\UserProfile\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

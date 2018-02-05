@@ -39,6 +39,8 @@ namespace UnipiForum.Controllers
                     //if (user == null)
                     //    UnipiForum.Models.User.FakeHash();
 
+                    
+
                     if (user == null || user.password_hash != form.Password)
                         ModelState.AddModelError("Username", "Username or password is incorrect");
 

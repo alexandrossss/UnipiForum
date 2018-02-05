@@ -6,20 +6,21 @@
 
 //namespace UnipiForum.Infrastructure
 //{
-//    public class RoleProvider:System.Web.Security.RoleProvider
+//    public class RoleProvider : System.Web.Security.RoleProvider
 //    {
 //        public override bool IsUserInRole(string username, string roleName)
 //        {
 //            throw new NotImplementedException();
 //        }
 
-      
+
 
 //        public override string[] GetRolesForUser(string username)
 //        {
-//            using (var context = new unipiforumSQLEntities())
+//            using (var context = new unipiforumSQLEntities2())
 //            {
-//                //return Auth.User.roles.Select(role => role.name).ToArray();
+
+//                return Auth.User.roles.Select(role => role.name).ToArray();
 //                return null;
 //            }
 //        }

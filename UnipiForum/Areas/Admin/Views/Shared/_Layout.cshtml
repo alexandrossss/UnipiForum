@@ -27,14 +27,14 @@
                 @Html.ActionLink("Users", "Index", "Users", new { area = "admin" }, new { })
             </li>
             <li class="pull-right">
-                @Html.RouteLink("Back to website", "Home")
+                @Html.RouteLink("Go to User Page", "Home")
             </li>
         </ul>
         @RenderBody()
     </div>
     @Scripts.Render("~/admin/scripts")
-    @RenderSection("Scripts",false)
-    
+    @RenderSection("Scripts", false)
+
 
     <form class="Hidden" id="anti-forgery-form">
         @Html.AntiForgeryToken()

@@ -31,5 +31,6 @@ namespace UnipiForum.Models
         public virtual DbSet<role_users> role_users { get; set; }
         public virtual DbSet<test> tests { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<result> results { get; set; }
     }
 }
