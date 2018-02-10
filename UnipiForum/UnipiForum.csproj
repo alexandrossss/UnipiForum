@@ -189,7 +189,7 @@
     <Compile Include="Controllers\UserTestsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Auth.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,6 +216,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBs Connection.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\group.cs">
+      <DependentUpon>DBs Connection.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\question.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
@@ -226,6 +229,9 @@
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role_users.cs">
+      <DependentUpon>DBs Connection.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\test.cs">
@@ -339,7 +345,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
-    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Tools\DeployDb-Dev.bat" />
     <Content Include="Views\UserTests\Index.cshtml" />
     <Content Include="Views\UserProfile\NewUser.cshtml" />

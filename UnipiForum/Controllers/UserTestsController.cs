@@ -81,12 +81,42 @@ namespace UnipiForum.Controllers
             using (var context = new unipiforumSQLEntities2())
             {
                 var test = context.tests.Find(test_id);
-                var resust= new result();
+                var resust = new result();
                 double testResults = 0.0;
+
+
+                var resquest = form.Questions;
+                if (resquest.Count != 0)
+                {
+                    foreach (var quest in resquest)
+                    {
+                        var trueAns = context.answers.Where(s => s.question_id == quest.Question_ID).ToList();
+                        foreach (var ans in quest.Answers_List)
+                        {
+                            //here add the result to result table
+
+                            var trAns = trueAns.FirstOrDefault(a => a.answer_id == ans.Answer_ID);
+                            if (ans.User_Answer)
+                            {
+                                resust.question_id = quest.Question_ID;
+                                resust.question_text = quest.Question_Text;
+                                resust.answer_id = ans.Answer_ID;
+                                resust.answer_text = ans.Answer_Text;
+                                resust.is_the_correct_answer = trAns?.is_correct;
+                                resust.user_answer = ans.User_Answer;
+                                resust.test_id = test_id;
+                                resust.test_text = test.test_text;
+                                resust.user_id = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id;
+                                context.results.Add(resust);
+                                context.SaveChanges();
+                            }
+                        }
+                    }
+                }
+
                 if (test.test_type == 0)
                 {
                     var questOf0Dif = form.Questions.Where(s => s.Question_Difficulty == 0).ToList();
-
                     if (questOf0Dif.Count != 0)
                     {
                         var numberquestOf0Dif = questOf0Dif.Count;
@@ -98,23 +128,6 @@ namespace UnipiForum.Controllers
                             foreach (var ans in quest.Answers_List)
                             {
                                 var trAns = trueAns?.FirstOrDefault(a => a.answer_id == ans.Answer_ID);
-                                //here add the result to result table
-                                if (ans.User_Answer)
-                                {
-                                    resust.question_id = quest.Question_ID;
-                                    resust.question_text = quest.Question_Text;
-                                    resust.answer_id = ans.Answer_ID;
-                                    resust.answer_text = ans.Answer_Text;
-                                    resust.is_the_correct_answer = trAns?.is_correct;
-                                    resust.user_answer = ans.User_Answer;
-                                    resust.test_id = test_id;
-                                    resust.test_text = test.test_text;
-                                    resust.user_id = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id;
-                                    context.results.Add(resust);
-                                    context.SaveChanges();
-                                }
-
-
                                 if (ans.User_Answer == trAns?.is_correct)
                                 {
                                     countOfcorrectAns++;
@@ -129,7 +142,7 @@ namespace UnipiForum.Controllers
 
                         }
 
-                        testResults = (double) passedQuest / numberquestOf0Dif;
+                        testResults = (double)passedQuest / numberquestOf0Dif;
                     }
 
                     if (testResults >= 0.45)
@@ -147,20 +160,6 @@ namespace UnipiForum.Controllers
                                 foreach (var ans in quest.Answers_List)
                                 {
                                     var trAns = trueAns.FirstOrDefault(a => a.answer_id == ans.Answer_ID);
-                                    if (ans.User_Answer)
-                                    {
-                                        resust.question_id = quest.Question_ID;
-                                        resust.question_text = quest.Question_Text;
-                                        resust.answer_id = ans.Answer_ID;
-                                        resust.answer_text = ans.Answer_Text;
-                                        resust.is_the_correct_answer = trAns?.is_correct;
-                                        resust.user_answer = ans.User_Answer;
-                                        resust.test_id = test_id;
-                                        resust.test_text = test.test_text;
-                                        resust.user_id = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id;
-                                        context.results.Add(resust);
-                                        context.SaveChanges();
-                                    }
                                     if (ans.User_Answer == trAns?.is_correct)
                                     {
                                         countOfcorrectAns++;
@@ -174,7 +173,7 @@ namespace UnipiForum.Controllers
                                 }
                             }
 
-                            testResults = (double) passedQuest / numberquestOf1Dif;
+                            testResults = (double)passedQuest / numberquestOf1Dif;
                         }
                     }
 
@@ -195,20 +194,6 @@ namespace UnipiForum.Controllers
                                     //here add the result to result table
 
                                     var trAns = trueAns.FirstOrDefault(a => a.answer_id == ans.Answer_ID);
-                                    if (ans.User_Answer)
-                                    {
-                                        resust.question_id = quest.Question_ID;
-                                        resust.question_text = quest.Question_Text;
-                                        resust.answer_id = ans.Answer_ID;
-                                        resust.answer_text = ans.Answer_Text;
-                                        resust.is_the_correct_answer = trAns?.is_correct;
-                                        resust.user_answer = ans.User_Answer;
-                                        resust.test_id = test_id;
-                                        resust.test_text = test.test_text;
-                                        resust.user_id = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id;
-                                        context.results.Add(resust);
-                                        context.SaveChanges();
-                                    }
                                     if (ans.User_Answer == trAns?.is_correct)
                                     {
                                         countOfcorrectAns++;
@@ -222,7 +207,7 @@ namespace UnipiForum.Controllers
                                 }
                             }
 
-                            testResults = (double) passedQuest / numberquestOf2Dif;
+                            testResults = (double)passedQuest / numberquestOf2Dif;
                         }
                     }
 
@@ -243,20 +228,6 @@ namespace UnipiForum.Controllers
                                     //here add the result to result table
 
                                     var trAns = trueAns.FirstOrDefault(a => a.answer_id == ans.Answer_ID);
-                                    if (ans.User_Answer)
-                                    {
-                                        resust.question_id = quest.Question_ID;
-                                        resust.question_text = quest.Question_Text;
-                                        resust.answer_id = ans.Answer_ID;
-                                        resust.answer_text = ans.Answer_Text;
-                                        resust.is_the_correct_answer = trAns?.is_correct;
-                                        resust.user_answer = ans.User_Answer;
-                                        resust.test_id = test_id;
-                                        resust.test_text = test.test_text;
-                                        resust.user_id = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id;
-                                        context.results.Add(resust);
-                                        context.SaveChanges();
-                                    }
                                     if (ans.User_Answer == trAns?.is_correct)
                                     {
                                         countOfcorrectAns++;
@@ -270,10 +241,10 @@ namespace UnipiForum.Controllers
                                 }
                             }
 
-                            testResults = (double) passedQuest / numberquestOf3Dif;
+                            testResults = (double)passedQuest / numberquestOf3Dif;
                         }
 
-                        if (testResults>=0.45)
+                        if (testResults >= 0.45)
                         {
 
                         }
@@ -295,20 +266,6 @@ namespace UnipiForum.Controllers
                                 //here add the result to result table
 
                                 var trAns = trueAns.FirstOrDefault(a => a.answer_id == ans.Answer_ID);
-                                if (ans.User_Answer)
-                                {
-                                    resust.question_id = quest.Question_ID;
-                                    resust.question_text = quest.Question_Text;
-                                    resust.answer_id = ans.Answer_ID;
-                                    resust.answer_text = ans.Answer_Text;
-                                    resust.is_the_correct_answer = trAns?.is_correct;
-                                    resust.user_answer = ans.User_Answer;
-                                    resust.test_id = test_id;
-                                    resust.test_text = test.test_text;
-                                    resust.user_id = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id;
-                                    context.results.Add(resust);
-                                    context.SaveChanges();
-                                }
                                 if (ans.User_Answer == trAns?.is_correct)
                                 {
                                     countOfcorrectAns++;
@@ -330,7 +287,12 @@ namespace UnipiForum.Controllers
 
                     }
                 }
+
                 
+
+
+
+
 
                 return RedirectToAction("Results", "UserProfile");
             }

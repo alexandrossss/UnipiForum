@@ -14,6 +14,15 @@
           <Property Name="question_id" Type="int" Nullable="false" />
           <Property Name="is_correct" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="test_id" Type="int" Nullable="false" />
+          <Property Name="diff_id" Type="int" Nullable="false" />
+          <Property Name="uli_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="question">
           <Key>
             <PropertyRef Name="question_id" />
@@ -53,6 +62,15 @@
           <Property Name="user_id" Type="int" />
           <Property Name="role_id" Type="int" />
         </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="test_id" Type="int" Nullable="false" />
+          <Property Name="diff_id" Type="int" Nullable="false" />
+          <Property Name="uli_id" Type="int" />
+        </EntityType>
         <EntityType Name="test">
           <Key>
             <PropertyRef Name="test_id" />
@@ -70,6 +88,7 @@
           <Property Name="username" Type="varchar" MaxLength="50" />
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="password_hash" Type="nvarchar" MaxLength="50" />
+          <Property Name="group_id" Type="int" />
         </EntityType>
         <Association Name="FK_answer_Toquestion">
           <End Role="question" Type="Self.question" Multiplicity="1">
@@ -123,12 +142,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_user_Togroup">
+          <End Role="group" Type="Self.group" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="unipiforumSQLModelStoreContainer">
           <EntitySet Name="answer" EntityType="Self.answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="results" EntityType="Self.results" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role_users" EntityType="Self.role_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_answer_Toquestion" Association="Self.FK_answer_Toquestion">
@@ -146,6 +179,10 @@
           <AssociationSet Name="FK_Table_ToTest" Association="Self.FK_Table_ToTest">
             <End Role="test" EntitySet="test" />
             <End Role="question" EntitySet="question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_Togroup" Association="Self.FK_user_Togroup">
+            <End Role="group" EntitySet="group" />
+            <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -210,6 +247,8 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password_hash" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="role_users" Relationship="Self.FK_role_users_Touser" FromRole="user" ToRole="role_users" />
+          <Property Name="group_id" Type="Int32" />
+          <NavigationProperty Name="group" Relationship="unipiforumSQLModel.FK_user_Togroup" FromRole="user" ToRole="group" />
         </EntityType>
         <Association Name="FK_answer_Toquestion">
           <End Role="question" Type="Self.question" Multiplicity="1">
@@ -287,6 +326,12 @@
             <End Role="role_users" EntitySet="role_users" />
           </AssociationSet>
           <EntitySet Name="results" EntityType="unipiforumSQLModel.result" />
+          <EntitySet Name="Tables" EntityType="unipiforumSQLModel.Table" />
+          <EntitySet Name="groups" EntityType="unipiforumSQLModel.group" />
+          <AssociationSet Name="FK_user_Togroup" Association="unipiforumSQLModel.FK_user_Togroup">
+            <End Role="group" EntitySet="groups" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="result">
           <Key>
@@ -303,6 +348,37 @@
           <Property Name="test_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="is_the_correct_answer" Type="Boolean" />
         </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="test_id" Type="Int32" Nullable="false" />
+          <Property Name="diff_id" Type="Int32" Nullable="false" />
+          <Property Name="uli_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="test_id" Type="Int32" Nullable="false" />
+          <Property Name="diff_id" Type="Int32" Nullable="false" />
+          <Property Name="uli_id" Type="Int32" Nullable="false" />
+          <Property Name="group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="users" Relationship="unipiforumSQLModel.FK_user_Togroup" FromRole="group" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_user_Togroup">
+          <End Type="unipiforumSQLModel.group" Role="group" Multiplicity="0..1" />
+          <End Type="unipiforumSQLModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -358,6 +434,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="unipiforumSQLModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_university_id" ColumnName="user_university_id" />
                 <ScalarProperty Name="username" ColumnName="username" />
@@ -379,6 +456,26 @@
                 <ScalarProperty Name="test_id" ColumnName="test_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="unipiforumSQLModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="uli_id" ColumnName="uli_id" />
+                <ScalarProperty Name="diff_id" ColumnName="diff_id" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groups">
+            <EntityTypeMapping TypeName="unipiforumSQLModel.group">
+              <MappingFragment StoreEntitySet="group">
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="uli_id" ColumnName="uli_id" />
+                <ScalarProperty Name="diff_id" ColumnName="diff_id" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,7 +12,7 @@ namespace UnipiForum
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            var namespaces = new[] { typeof(PostsController).Namespace };
+            var namespaces = new[] { typeof(GroupController).Namespace };
 
 
 
@@ -21,12 +21,12 @@ namespace UnipiForum
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" }, namespaces);
             routes.MapRoute("Logout", "logout", new { controller = "Auth", action = "Logout" }, namespaces);
             routes.MapRoute("UserTests", "usertests", new { controller = "UserTests", action = "Index" }, namespaces);
-
+            routes.MapRoute("Auth", "auth", new { controller = "Auth", action = "Lazarakis" }, namespaces);
             routes.MapRoute("NewUserProfile", "newuserprofile", new { controller = "UserProfile", action = "NewUser" }, namespaces);
             routes.MapRoute("UserProfile", "userprofile", new { controller = "UserProfile", action = "MyProfilePage" }, namespaces);
             routes.MapRoute("UserProfileResults", "userprofileresults", new { controller = "UserProfile", action = "Results" }, namespaces);
 
-            routes.MapRoute("Home", "", new { controller = "Posts", action = "Index" }, namespaces);
+            routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
 
 
             routes.MapRoute("About", "about", new { controller = "Home", action = "About" }, namespaces);

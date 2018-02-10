@@ -12,23 +12,20 @@ namespace UnipiForum.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public group()
         {
-            this.role_users = new HashSet<role_users>();
+            this.users = new HashSet<user>();
         }
     
-        public int user_id { get; set; }
-        public string user_university_id { get; set; }
-        public string username { get; set; }
-        public string email { get; set; }
-        public string password_hash { get; set; }
-        public Nullable<int> group_id { get; set; }
+        public int test_id { get; set; }
+        public int diff_id { get; set; }
+        public int uli_id { get; set; }
+        public int group_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<role_users> role_users { get; set; }
-        public virtual group group { get; set; }
+        public virtual ICollection<user> users { get; set; }
     }
 }

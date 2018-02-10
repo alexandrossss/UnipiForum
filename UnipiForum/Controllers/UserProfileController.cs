@@ -22,6 +22,41 @@ namespace UnipiForum.Controllers
             });
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult NewUser(SighUp form)
+        {
+            var user = new user();
+
+
+            using (var context = new unipiforumSQLEntities2())
+            {
+                var _users = context.users.ToList();
+
+                if (_users.Any(u => u.user_university_id == form.University_ID))
+
+                    ModelState.AddModelError("University_ID", "University ID must be unique");
+
+                if (!ModelState.IsValid)
+                    return View(form);
+
+                user.user_university_id = form.University_ID;
+                user.email = form.Email;
+                user.username = form.Username;
+                user.password_hash = form.Password;
+                context.users.Add(user);
+                context.SaveChanges();
+                var auth = new AuthLogin()
+                {
+                    Username=form.Username,
+                    Password = form.Password
+                };
+
+                
+                return RedirectToAction("Lazarakis", "Auth",auth);//new{form = auth}
+
+            }
+        }
+
         public ActionResult MyProfilePage()
         {
             using (var context = new unipiforumSQLEntities2())
