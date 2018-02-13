@@ -20,11 +20,14 @@
 <body>
     <div class="container">
         <ul class="nav nav-pills">
-            <li class="@(SelectedTabClass("tests"))">
-                @Html.ActionLink("Tests", "Index", "Tests", new { area = "admin" }, new { })
-            </li>
+            @*<li class="@(SelectedTabClass("tests"))">
+            @Html.ActionLink("Tests", "Index", "Tests", new { area = "admin" }, new { })
+        </li>*@
             <li class="@(SelectedTabClass("users"))">
                 @Html.ActionLink("Users", "Index", "Users", new { area = "admin" }, new { })
+            </li>
+            <li class="@(SelectedTabClass("groups"))">
+                @Html.ActionLink("Groups", "AllGroups", "Groups", new { area = "admin" }, new { })
             </li>
             <li class="pull-right">
                 @Html.RouteLink("Go to User Page", "Home")

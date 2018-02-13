@@ -181,8 +181,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\GroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Groups.cs" />
     <Compile Include="Areas\Admin\ViewModels\Tests.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -312,6 +314,9 @@
       <DependentUpon>DBs Connection.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Users\Results.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\AllGroups.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\UserGroup.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\GTG.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

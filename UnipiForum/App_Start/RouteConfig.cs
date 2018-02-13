@@ -29,6 +29,7 @@ namespace UnipiForum
             routes.MapRoute("UserProfile", "userprofile", new { controller = "UserProfile", action = "MyProfilePage" }, namespaces);
             routes.MapRoute("UserProfileResults", "userprofileresults", new { controller = "UserProfile", action = "Results" }, namespaces);
             routes.MapRoute("Results", "results", new { controller = "Users", action = "Results" }, namespaces);
+            routes.MapRoute("UserGroup", "usergroup", new { controller = "Groups", action = "UserGroup" }, namespaces);
 
             routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
 

@@ -26,9 +26,13 @@
                 <li class="pull-right">
                     <a href="@Url.RouteUrl("logout")">Logout</a>
                 </li>
-                <li class="pull-right">
-                    <a href="@Url.Action("Index", "Tests", new {area = "admin"})">Go to Admin Page</a>
-                </li>
+                if (User.IsInRole("admin"))
+                {
+                    <li class="pull-right">
+                        <a href="@Url.Action("Index", "Users", new {area = "admin"})">Go to Admin Page</a>
+                    </li>
+                    
+                }
                 <li class="pull-right">
                     <a href="@Url.RouteUrl("UserProfile")">Go to My Profile </a>
                 </li>

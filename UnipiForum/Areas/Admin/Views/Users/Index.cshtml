@@ -11,9 +11,9 @@
     <thead>
         <tr>
             <th>User ID</th>
-            <th>username</th>
-            <th>email</th>
-            <th>roles</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -43,6 +43,10 @@
                             <a href="@Url.Action("results",new{user.user_id})" class="btn btn-xs btn-primary">
                                 <i class="glyphicon glyphicon-book"></i>
                                 Results
+                            </a>
+                            <a href="@Url.Action("UserGroup","Groups",new{user.user_id})" class="btn btn-xs btn-primary">
+                                <i class="glyphicon glyphicon-dashboard"></i>
+                                Group of this User
                             </a>
                         </div>
                     </td>
