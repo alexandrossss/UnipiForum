@@ -53,4 +53,10 @@ namespace UnipiForum.Areas.Admin.ViewModels
         public string Password { get; set; }
     }
 
+    public class ResultsViewModel
+    {
+        public string Username { get; set; }
+        public IList<result> Results { get; set; }
+
+    }
 }

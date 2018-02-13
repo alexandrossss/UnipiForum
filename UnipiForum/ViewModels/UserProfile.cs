@@ -31,7 +31,7 @@ namespace UnipiForum.ViewModels
 
     public class ResultsViewModel
     {
-        public IEnumerable<result> Results { get; set; }
+        public IList<result> Results { get; set; }
 
     }
 }

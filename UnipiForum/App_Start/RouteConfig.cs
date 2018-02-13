@@ -22,9 +22,13 @@ namespace UnipiForum
             routes.MapRoute("Logout", "logout", new { controller = "Auth", action = "Logout" }, namespaces);
             routes.MapRoute("UserTests", "usertests", new { controller = "UserTests", action = "Index" }, namespaces);
             routes.MapRoute("Auth", "auth", new { controller = "Auth", action = "Lazarakis" }, namespaces);
+
+            routes.MapRoute("AssignToGroup", "assigntogroup", new { controller = "Group", action = "AssignToGroup" }, namespaces);
+
             routes.MapRoute("NewUserProfile", "newuserprofile", new { controller = "UserProfile", action = "NewUser" }, namespaces);
             routes.MapRoute("UserProfile", "userprofile", new { controller = "UserProfile", action = "MyProfilePage" }, namespaces);
             routes.MapRoute("UserProfileResults", "userprofileresults", new { controller = "UserProfile", action = "Results" }, namespaces);
+            routes.MapRoute("Results", "results", new { controller = "Users", action = "Results" }, namespaces);
 
             routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
 

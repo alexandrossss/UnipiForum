@@ -29,6 +29,7 @@ namespace UnipiForum.Controllers
                     context.groups.Add(nGroup);
                     context.SaveChanges();
 
+                    groupsOfThatDiff= context.groups.Where(o => o.diff_id == diffId).ToList();
                     foreach (var grp in groupsOfThatDiff)
                     {
                         if (grp.users.Count < 4)

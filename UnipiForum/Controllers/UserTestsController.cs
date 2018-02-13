@@ -145,7 +145,7 @@ namespace UnipiForum.Controllers
                         testResults = (double)passedQuest / numberquestOf0Dif;
                     }
 
-                    if (testResults >= 0.45)
+                    if (testResults >= 0.45)//is passed the 0
                     {
                         testResults = 0.0;
                         var questOf1Dif = form.Questions.Where(s => s.Question_Difficulty == 1).ToList();
@@ -176,8 +176,12 @@ namespace UnipiForum.Controllers
                             testResults = (double)passedQuest / numberquestOf1Dif;
                         }
                     }
+                    else
+                    {
+                        return RedirectToAction("AssignToGroup", "Group", new{ diffId=0,userId= context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id});
+                    }
 
-                    if (testResults >= 0.45)
+                    if (testResults >= 0.45)//Is passed the 1
                     {
                         testResults = 0.0;
                         var questOf2Dif = form.Questions.Where(s => s.Question_Difficulty == 1).ToList();
@@ -210,8 +214,12 @@ namespace UnipiForum.Controllers
                             testResults = (double)passedQuest / numberquestOf2Dif;
                         }
                     }
+                    else
+                    {
+                        return RedirectToAction("AssignToGroup", "Group", new { diffId = 1, userId = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id });
+                    }
 
-                    if (testResults >= 0.45)
+                    if (testResults >= 0.45)//is passed the 2
                     {
                         testResults = 0.0;
                         var questOf3Dif = form.Questions.Where(s => s.Question_Difficulty == 1).ToList();
@@ -244,11 +252,10 @@ namespace UnipiForum.Controllers
                             testResults = (double)passedQuest / numberquestOf3Dif;
                         }
 
-                        if (testResults >= 0.45)
-                        {
-
-                        }
+                        return RedirectToAction("AssignToGroup", "Group", new { diffId = 3, userId = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id });
                     }
+
+                    return RedirectToAction("AssignToGroup", "Group", new { diffId = 2, userId = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id });
                 }
                 else
                 {
@@ -282,10 +289,22 @@ namespace UnipiForum.Controllers
 
                         testResults = (double)passedQuest / numberquestOf0Dif;
                     }
-                    if (testResults >= 0.45)
-                    {
 
+                    var testdiff = test.test_type-1;
+                    if (testResults >= 0.45 && testdiff==3)
+                    {
+                        // you won
+                        
                     }
+                    else if (testResults >= 0.45)
+                    {
+                        return RedirectToAction("AssignToGroup", "Group", new { diffId = testdiff+1, userId = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id });
+                    }
+                    else
+                    {
+                        return RedirectToAction("AssignToGroup", "Group", new { diffId = testdiff, userId = context.users.FirstOrDefault(d => d.username == User.Identity.Name).user_id });
+                    }
+                    
                 }
 
                 

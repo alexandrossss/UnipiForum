@@ -11,7 +11,7 @@ using UnipiForum.Models;
 
 namespace UnipiForum.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     [SelectedTab("users")]
     public class UsersController : Controller
     {
@@ -63,7 +63,11 @@ namespace UnipiForum.Areas.Admin.Controllers
 
                 if (_users.Any(u => u.user_university_id == form.University_ID))
 
-                    ModelState.AddModelError("Username", "Username must be unique");
+                    ModelState.AddModelError("University_ID", "University ID must be unique");
+
+                if (_users.Any(u => u.username == form.Username))
+
+                    ModelState.AddModelError("Username", "Username alredy exists");
 
                 if (!ModelState.IsValid)
                     return View(form);
@@ -246,6 +250,21 @@ namespace UnipiForum.Areas.Admin.Controllers
                 context.users.Remove(user);                //Database.Session.Delete(user);
                 context.SaveChanges();
                 return RedirectToAction("index");
+            }
+        }
+
+        //[HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Results(int user_id)
+        {
+            using (var context = new unipiforumSQLEntities2())
+            {
+                var username = context.users.FirstOrDefault(p => p.user_id == user_id)?.username;
+                return View(new ResultsViewModel()
+                {
+                    Username =username,
+                    Results = context.results.Where(g => g.user_id == user_id).ToList()
+                });
+
             }
         }
 

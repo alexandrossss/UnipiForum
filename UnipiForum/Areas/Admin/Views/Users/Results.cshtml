@@ -1,0 +1,74 @@
+﻿@model UnipiForum.Areas.Admin.ViewModels.ResultsViewModel
+
+<h1>Results for User @Model.Username</h1>
+
+
+
+<form class="Hidden" id="anti-forgery-form">
+    @Html.AntiForgeryToken()
+</form>
+
+<div>
+    <div class="panel-body">
+        @{ var lastId = 0; }
+        @foreach (var test in Model.Results)
+        {
+            var testID = test.test_id;
+
+            if (lastId != testID)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading" onclick="myFunction(@testID)">Test Text: @test.test_text</div>
+                    <div id=@testID>
+
+                        @{
+                            double isTrue = 0;
+                            double isFalse = 0;
+                        }
+                        @foreach (var res in Model.Results.Where(o => o.test_id == testID))
+                        {
+
+
+                            <div class="panel panel-default" style="width: 98%; margin: 1%;">
+                                <div class="panel-heading">Question: @res.question_text</div>
+                                <div class="panel panel-default" style="width: 98%; margin: 1%;">
+                                    @if (res.user_answer == res.is_the_correct_answer)
+                                    {
+                                        <div class="panel-heading" style="color: green;">Answer: @res.answer_text</div>
+                                        isTrue = isTrue + 1;
+                                    }
+                                    else
+                                    {
+                                        <div class="panel-heading" style="color: red;">Answer: @res.answer_text</div>
+                                        isFalse = isFalse + 1;
+                                    }
+                                </div>
+                            </div>
+                            lastId = res.test_id;
+
+
+                        }
+
+                        @{ var grade = (isTrue / (isFalse + isTrue)) * 100; }
+                        <div class="panel-heading">@Model.Username Grade is: @grade %</div>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+</div>
+
+
+<script>
+    function myFunction(testDivId) {
+        var x = document.getElementById(testDivId.toString());
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
+

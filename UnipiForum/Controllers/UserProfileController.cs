@@ -36,6 +36,10 @@ namespace UnipiForum.Controllers
 
                     ModelState.AddModelError("University_ID", "University ID must be unique");
 
+                if (_users.Any(u => u.username == form.Username))
+
+                    ModelState.AddModelError("Username", "Username already exist");
+
                 if (!ModelState.IsValid)
                     return View(form);
 

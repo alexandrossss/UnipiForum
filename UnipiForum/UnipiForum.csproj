@@ -311,6 +311,7 @@
     <Content Include="Models\DBs Connection.edmx.diagram">
       <DependentUpon>DBs Connection.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Users\Results.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

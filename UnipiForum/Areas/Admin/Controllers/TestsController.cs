@@ -9,7 +9,7 @@ using UnipiForum.Models;
 
 namespace UnipiForum.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     [SelectedTab("posts")]
     public class TestsController : Controller
     {
