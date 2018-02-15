@@ -26,6 +26,7 @@ namespace UnipiForum.Controllers
                 if (theGroup == 0)
                 {
                     var nGroup=new group();
+                    nGroup.diff_id = diffId;
                     context.groups.Add(nGroup);
                     context.SaveChanges();
 
@@ -40,11 +41,11 @@ namespace UnipiForum.Controllers
                 }
 
                 user.group_id = theGroup;
-                
+                context.SaveChanges();
                     //here you will assign a user for the first time to a Group
 
                 
-                return null;
+                return RedirectToAction("MyProfilePage","UserProfile");
             }
         }
 

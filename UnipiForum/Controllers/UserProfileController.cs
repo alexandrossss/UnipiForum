@@ -51,12 +51,12 @@ namespace UnipiForum.Controllers
                 context.SaveChanges();
                 var auth = new AuthLogin()
                 {
-                    Username=form.Username,
+                    Username = form.Username,
                     Password = form.Password
                 };
 
-                
-                return RedirectToAction("Lazarakis", "Auth",auth);//new{form = auth}
+
+                return RedirectToAction("Lazarakis", "Auth", auth);//new{form = auth}
 
             }
         }
@@ -84,6 +84,19 @@ namespace UnipiForum.Controllers
                     Results = context.results.Where(g => g.user_id == usid).ToList()
                 });
 
+            }
+        }
+
+        public ActionResult UsGroup()
+        {
+            using (var context = new unipiforumSQLEntities2())
+            {
+                var user = context.users.FirstOrDefault(i => i.username == User.Identity.Name);
+                var group = context.groups.Include("users").FirstOrDefault(o=>o.group_id== user.group_id);
+                return View(new UserGroup()
+                {
+                    Group = group
+                });
             }
         }
     }

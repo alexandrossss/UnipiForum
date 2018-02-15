@@ -12,11 +12,12 @@ namespace UnipiForum.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Table
+    public partial class chat
     {
         public int id { get; set; }
-        public int test_id { get; set; }
-        public int diff_id { get; set; }
-        public Nullable<int> uli_id { get; set; }
+        public int user_id { get; set; }
+        public int group_id { get; set; }
+        public string chat_text { get; set; }
+        public System.DateTime chat_time { get; set; }
     }
 }

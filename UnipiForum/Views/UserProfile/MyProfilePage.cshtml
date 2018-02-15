@@ -25,6 +25,9 @@
         <li class="@(SelectedTabClass("results"))">
             @Html.ActionLink("Results", "Results", "UserProfile", new { })
         </li>
+        <li class="@(SelectedTabClass("usergroups"))">
+            @Html.ActionLink("Go to my Group", "UsGroup", "UserProfile", new { })
+        </li>
     </ul>
 
 </div>

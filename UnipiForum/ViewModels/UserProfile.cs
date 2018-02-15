@@ -34,4 +34,9 @@ namespace UnipiForum.ViewModels
         public IList<result> Results { get; set; }
 
     }
+
+    public class UserGroup
+    {
+        public group Group { get; set; }
+    }
 }

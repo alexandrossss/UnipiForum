@@ -1,0 +1,22 @@
+﻿@model UnipiForum.ViewModels.UserGroup
+
+<h1>Group @Model.Group.group_id</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>University ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Group.users)
+        {
+            <tr>
+                <td>@user.username</td>
+                <td>@user.user_university_id</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

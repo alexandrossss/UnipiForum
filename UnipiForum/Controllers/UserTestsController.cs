@@ -184,7 +184,7 @@ namespace UnipiForum.Controllers
                     if (testResults >= 0.45)//Is passed the 1
                     {
                         testResults = 0.0;
-                        var questOf2Dif = form.Questions.Where(s => s.Question_Difficulty == 1).ToList();
+                        var questOf2Dif = form.Questions.Where(s => s.Question_Difficulty == 2).ToList();
                         if (questOf2Dif.Count != 0)
                         {
                             var numberquestOf2Dif = questOf0Dif.Count;
@@ -222,7 +222,7 @@ namespace UnipiForum.Controllers
                     if (testResults >= 0.45)//is passed the 2
                     {
                         testResults = 0.0;
-                        var questOf3Dif = form.Questions.Where(s => s.Question_Difficulty == 1).ToList();
+                        var questOf3Dif = form.Questions.Where(s => s.Question_Difficulty == 3).ToList();
                         if (questOf3Dif.Count != 0)
                         {
                             var numberquestOf3Dif = questOf0Dif.Count;

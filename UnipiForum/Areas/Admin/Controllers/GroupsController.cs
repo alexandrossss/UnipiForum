@@ -14,7 +14,7 @@ namespace UnipiForum.Areas.Admin.Controllers
     public class GroupsController : Controller
     {
         // GET: Admin/Posts
-        public ActionResult AllGroups()
+        public ActionResult AllGroups()// Groups page for admin
         {
             using (var context = new unipiforumSQLEntities2())
             {
@@ -30,11 +30,11 @@ namespace UnipiForum.Areas.Admin.Controllers
 
             }
         }
-        public ActionResult GTG(int grp_id)
+        public ActionResult GTG(int group_id)// Go to Group when you pick a group from groups page
         {
             using (var context = new unipiforumSQLEntities2())
             {
-                var group = context.groups.Find(grp_id);
+                var group = context.groups.Include("users").FirstOrDefault(p => p.group_id == group_id);
 
 
                 return View(new GTG
@@ -48,23 +48,7 @@ namespace UnipiForum.Areas.Admin.Controllers
         }
         
 
-        public ActionResult UserGroup(int user_id)
-        {
-            using (var context = new unipiforumSQLEntities2())
-            {
-                var user = context.users.Find(user_id);
-                var urgroup = context.groups.FirstOrDefault(p => p.group_id == user.group_id);
-                
-
-                return View(new UsGroup
-                {
-                    Group = urgroup
-
-
-                });
-
-            }
-        }
+        
 
     }
 }  

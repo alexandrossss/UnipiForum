@@ -14,8 +14,5 @@ namespace UnipiForum.Areas.Admin.ViewModels
         public group Group { get; set; }
     }
 
-    public class UsGroup
-    {
-        public group Group { get; set; }
-    }
+
 }

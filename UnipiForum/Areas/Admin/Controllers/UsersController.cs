@@ -268,6 +268,24 @@ namespace UnipiForum.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult UserGroup(int user_id)// Go to Group from a User
+        {
+            using (var context = new unipiforumSQLEntities2())
+            {
+                var user = context.users.Find(user_id);
+                var urgroup = context.groups.Include("users").FirstOrDefault(p => p.group_id == user.group_id);
+
+
+                return View(new UsGroup
+                {
+                    Group = urgroup
+
+
+                });
+
+            }
+        }
+
         //private void SyncRoles(ICollection<RoleCheckbox> checkboxes, ICollection<role> roles)
         //{
 

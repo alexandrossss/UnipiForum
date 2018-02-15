@@ -203,6 +203,9 @@
     <Compile Include="Models\answer.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\chat.cs">
+      <DependentUpon>DBs Connection.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBs Connection.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -231,9 +234,6 @@
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role_users.cs">
-      <DependentUpon>DBs Connection.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Table.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\test.cs">
@@ -315,7 +315,7 @@
     </Content>
     <Content Include="Areas\Admin\Views\Users\Results.cshtml" />
     <Content Include="Areas\Admin\Views\Groups\AllGroups.cshtml" />
-    <Content Include="Areas\Admin\Views\Groups\UserGroup.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\UserGroup.cshtml" />
     <Content Include="Areas\Admin\Views\Groups\GTG.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -357,6 +357,7 @@
     <Content Include="Views\UserProfile\NewUser.cshtml" />
     <Content Include="Views\UserProfile\MyProfilePage.cshtml" />
     <Content Include="Views\UserProfile\Results.cshtml" />
+    <Content Include="Views\UserProfile\UsGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -59,4 +59,9 @@ namespace UnipiForum.Areas.Admin.ViewModels
         public IList<result> Results { get; set; }
 
     }
+
+    public class UsGroup
+    {
+        public group Group { get; set; }
+    }
 }

@@ -32,7 +32,7 @@ namespace UnipiForum.Models
         public virtual DbSet<test> tests { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<result> results { get; set; }
-        public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<group> groups { get; set; }
+        public virtual DbSet<chat> chats { get; set; }
     }
 }
