@@ -1,24 +1,7 @@
-﻿@*<!DOCTYPE html>
-
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Index</title>
-    </head>
-    <body>
-        <div>*@
-@*<h1> Home page</h1>*@
-@*<a href="@Url.Action("Index","UploadFile")" class="btn btn-xs btn-primary">
-                <i class="glyphicon glyphicon-dashboard"></i>
-                Upload a File
-            </a>
-           </div>
-    </body>
-    </html>*@
-
+﻿
 
 <script type="text/javascript" src="~/Scripts/Index.js"></script>
-@Html.Hidden("FileUploadUrl", Url.Action("UploadFiles", "Home"))
+@Html.Hidden("FileUploadUrl", Url.Action("UploadFiles", "UploadFile"))
 <table>
     <tr>
         <td>
@@ -43,7 +26,8 @@
     </tr>
     <tr>
         <td>
-            <button type="button" id="btnUpload">UPLOAD FILES</button>
+            @*<button type="button" id="btnUpload">UPLOAD FILES</button>*@
+            <input type="submit" id="btnUpload" value="UPLOAD FILES" class="btn btn-primary" />
         </td>
     </tr>
 </table>

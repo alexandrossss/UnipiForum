@@ -5,10 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using NHibernate.Linq;
+using UnipiForum.Models;
+using UnipiForum.ViewModels;
 
 namespace UnipiForum.Controllers
 {
-    public class HomeController : Controller
+    public class UploadFile : Controller
     {
         public ActionResult Index()
         {
@@ -40,7 +44,7 @@ namespace UnipiForum.Controllers
                 serverMessage = "Files upload is failed. Please try again.";
             }
 
-            return Json(new { IsSucccess = isSuccess, ServerMessage = serverMessage }, JsonRequestBehavior.AllowGet);
+            return Json(new {IsSucccess = isSuccess, ServerMessage = serverMessage}, JsonRequestBehavior.AllowGet);
         }
     }
 }

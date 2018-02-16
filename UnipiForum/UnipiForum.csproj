@@ -187,6 +187,8 @@
     <Compile Include="Areas\Admin\ViewModels\Groups.cs" />
     <Compile Include="Areas\Admin\ViewModels\Tests.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\UploadFile.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\UserTestsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
@@ -318,6 +320,7 @@
     <Content Include="Areas\Admin\Views\Users\UserGroup.cshtml" />
     <Content Include="Areas\Admin\Views\Groups\GTG.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -358,9 +361,12 @@
     <Content Include="Views\UserProfile\MyProfilePage.cshtml" />
     <Content Include="Views\UserProfile\Results.cshtml" />
     <Content Include="Views\UserProfile\UsGroup.cshtml" />
+    <Content Include="Views\UploadFile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
+    <Folder Include="Views\Chat\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

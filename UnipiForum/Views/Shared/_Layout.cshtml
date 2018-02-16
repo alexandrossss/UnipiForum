@@ -1,4 +1,5 @@
-﻿@{
+﻿@using UnipiForum.Models
+@{
     Layout = null;
 }
 @helper SelectedTabClass(string tabName)
@@ -29,13 +30,16 @@
                 if (User.IsInRole("admin"))
                 {
                     <li class="pull-right">
-                        <a href="@Url.Action("Index", "Users", new {area = "admin"})">Go to Admin Page</a>
+                        <a href="@Url.Action("Index", "Users", new {area = "admin"})">Go to Admin Page</a>`
                     </li>
-                    
+
                 }
-                <li class="pull-right">
-                    <a href="@Url.RouteUrl("UserProfile")">Go to My Profile </a>
-                </li>
+                if (User.IsInRole("") || User.IsInRole("student"))
+                {
+                    <li class="pull-right">
+                        <a href="@Url.RouteUrl("UserProfile")">Go to My Profile </a>
+                    </li>
+                }
             }
             else
             {
@@ -54,15 +58,16 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <p>Welcome back, @User.Identity.Name</p>
-
-
-                <a href="@Url.RouteUrl("UserTests")">Do a Test TEST :P</a>
-                if (User.IsInRole("admin"))
+                using (var context = new unipiforumSQLEntities2())
                 {
-                    <a href="@Url.Action("Index","Users",new {area="admin"})">View posts in admin</a>
+                    if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p=>p.username==User.Identity.Name).group_id == null))
+                    {
+                        <p>Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("UserTests")">Do your first test</a></p>
+                    }
                 }
+
             }
-            
+
         </header>
         <br />
         <br />

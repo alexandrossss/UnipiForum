@@ -34,6 +34,7 @@ namespace UnipiForum
 
             routes.MapRoute("UserGroup", "usergroup", new { controller = "UserProfile", action = "UsGroup" }, namespaces);
 
+            routes.MapRoute("UploadFile", "uploadfile", new {controller = "UploadFile", action = "Index"}, namespaces);
             routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
 
 
