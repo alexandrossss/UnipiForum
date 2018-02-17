@@ -28,11 +28,11 @@
             </li>
             @using (var context = new unipiforumSQLEntities2())
             {
-                if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id != null))
+                if ((User.IsInRole("") || User.IsInRole("student")) && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id != null))
                 {
-                    <li class="@(SelectedTabClass("usergroups"))">
-                        @Html.ActionLink("Go to my Group", "UsGroup", "UserProfile", new { })
-                    </li>
+            <li class="@(SelectedTabClass("usergroups"))">
+                <a href="@Url.Action("GTG", "Groups", new {area = "admin", context.users.FirstOrDefault(i => i.username == User.Identity.Name).group_id})">Go to my Group</a>`
+            </li>
                 }
             }
         </ul>

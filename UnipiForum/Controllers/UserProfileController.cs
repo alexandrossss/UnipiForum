@@ -31,6 +31,8 @@ namespace UnipiForum.Controllers
             using (var context = new unipiforumSQLEntities2())
             {
                 var _users = context.users.ToList();
+                
+
 
                 if (_users.Any(u => u.user_university_id == form.University_ID))
 
@@ -43,11 +45,18 @@ namespace UnipiForum.Controllers
                 if (!ModelState.IsValid)
                     return View(form);
 
+                
+
                 user.user_university_id = form.University_ID;
                 user.email = form.Email;
                 user.username = form.Username;
                 user.password_hash = form.Password;
                 context.users.Add(user);
+                context.SaveChanges();
+                var roleus = new role_users();
+                roleus.role_id = context.roles.FirstOrDefault(p => p.name == "student").role_id;
+                roleus.user_id = context.users.FirstOrDefault(o => o.username == form.Username).user_id;
+                context.role_users.Add(roleus);
                 context.SaveChanges();
                 var auth = new AuthLogin()
                 {

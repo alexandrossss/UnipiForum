@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using UnipiForum.Areas.Admin.Controllers;
 using UnipiForum.Controllers;
 
 namespace UnipiForum
@@ -13,11 +14,13 @@ namespace UnipiForum
         public static void RegisterRoutes(RouteCollection routes)
         {
             var namespaces = new[] { typeof(GroupController).Namespace };
-
+            //var chatNamespace = new[] { typeof(ChatController).Namespace };
 
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" }, namespaces);
             routes.MapRoute("Logout", "logout", new { controller = "Auth", action = "Logout" }, namespaces);
             routes.MapRoute("UserTests", "usertests", new { controller = "UserTests", action = "Index" }, namespaces);
@@ -35,8 +38,11 @@ namespace UnipiForum
             routes.MapRoute("UserGroup", "usergroup", new { controller = "UserProfile", action = "UsGroup" }, namespaces);
 
             routes.MapRoute("UploadFile", "uploadfile", new {controller = "UploadFile", action = "Index"}, namespaces);
-            routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
 
+            routes.MapRoute("UploadFiles", "uploadfiles", new { controller = "Home", action = "UploadFiles" }, namespaces);
+
+
+            //routes.MapRoute("Chat", "GetChatMessages", new {controller = "Chat", action = "GetChatMessages"}, chatNamespace);
 
             routes.MapRoute("About", "about", new { controller = "Home", action = "About" }, namespaces);
         }

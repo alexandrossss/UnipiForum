@@ -14,6 +14,8 @@
 <head>
     <title>@ViewBag.title - Unipi Forum </title>
     @Styles.Render("~/styles")
+    @Scripts.Render("~/scripts")
+    @RenderSection("Scripts", false)
 </head>
 <body>
     <div class="container">
@@ -34,12 +36,11 @@
                     </li>
 
                 }
-                if (User.IsInRole("") || User.IsInRole("student"))
-                {
-                    <li class="pull-right">
-                        <a href="@Url.RouteUrl("UserProfile")">Go to My Profile </a>
-                    </li>
-                }
+
+                <li class="pull-right">
+                    <a href="@Url.RouteUrl("UserProfile")">Go to My Profile </a>
+                </li>
+
             }
             else
             {
@@ -60,7 +61,7 @@
                 <p>Welcome back, @User.Identity.Name</p>
                 using (var context = new unipiforumSQLEntities2())
                 {
-                    if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p=>p.username==User.Identity.Name).group_id == null))
+                    if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
                     {
                         <p>Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("UserTests")">Do your first test</a></p>
                     }
@@ -73,8 +74,7 @@
         <br />
         @RenderBody()
     </div>
-    @Scripts.Render("~/scripts")
-    @RenderSection("Scripts", false)
+
 
 </body>
 </html>
