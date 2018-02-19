@@ -9,39 +9,42 @@
 
 
 }
-<h1>Group @Model.Group.group_id with Diff @Model.Group.diff_id</h1>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>User Name</th>
-            <th>University ID</th>
-        </tr>
+<table class="table table-striped pull-right panel panel-default" style="width: 30%; ">
+    <thead class="panel panel-heading">
+    <tr>
+        <th>User Name</th>
+        <th>University ID</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model.Group.users)
-        {
-            <tr>
-                <td>@user.username</td>
-                <td>@user.user_university_id</td>
-            </tr>
-        }
+    @foreach (var user in Model.Group.users)
+    {
+        <tr>
+            <td>@user.username</td>
+            <td>@user.user_university_id</td>
+        </tr>
+    }
     </tbody>
 </table>
+<div class="panel panel-default" style="width: 65%; height: 190px;">
+    <div class="panel-heading" style="font-weight: bold;" >Ulh</div>
+    <div class="panel-body"> @Model.Ulh.text</div>
+</div>
 
-<div id="chatContainer" class="chatContainer">
+<div id="chatContainer" class="chatContainer" style="width: 100%;">
 
 
     <div class="chat-window-title">
-        <div class="text">Echobot</div>
+        <div class="text">Chat</div>
     </div>
     <div class="chat-window-content">
         <div class="chat-window-inner-content message-board pm-window">
-            <div class="messages-wrapper" style="height: 450px;">
+            <div class="messages-wrapper" style="height: 450px ;">
                 @*current_user_message*@
                 @foreach (var chat in Model.ChatMessages)
                 {
-                    string cssClass ="";
+                    string cssClass = "";
                     if (chat.IsCurrentUserMessage)
                     {
                         cssClass = "current_user_message";
@@ -115,8 +118,8 @@
     });
 
     function validateMessage(messageContent) {
-        if (messageContent == null || messageContent === "" || messageContent.trim()===""|| messageContent.length>3) {
-            window.alert("DICK TOO HUGE. NEED SMALLER DICK.");
+        if (messageContent == null || messageContent === "" || messageContent.trim() === "") {  //|| messageContent.length>3){
+            window.alert("You can not input an empty text.");
             return false;
         }
         return true;

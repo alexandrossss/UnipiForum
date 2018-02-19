@@ -22,7 +22,7 @@ namespace UnipiForum.Controllers
             string serverMessage = string.Empty;
             var fileOne = Request.Files[0] as HttpPostedFileBase;
             //var fileTwo = Request.Files[1] as HttpPostedFileBase;
-            string uploadPath = ConfigurationManager.AppSettings["UPLOAD_PATH"].ToString();
+            string uploadPath = Server.MapPath(".\\Files"); // ConfigurationManager.AppSettings["UPLOAD_PATH"].ToString();
             string newFileOne = Path.Combine(uploadPath, fileOne.FileName);
             //string newFileTwo = Path.Combine(uploadPath, fileTwo.FileName);
 

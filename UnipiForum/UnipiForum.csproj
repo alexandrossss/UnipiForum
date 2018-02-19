@@ -241,6 +241,9 @@
     <Compile Include="Models\test.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ulh.cs">
+      <DependentUpon>DBs Connection.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>DBs Connection.tt</DependentUpon>
     </Compile>

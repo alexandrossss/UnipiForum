@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="unipiforumSQLModel.group" Width="1.5" PointX="6.125" PointY="4.125" />
         <AssociationConnector Association="unipiforumSQLModel.FK_user_Togroup" />
         <EntityTypeShape EntityType="unipiforumSQLModel.chat" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="unipiforumSQLModel.ulh" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

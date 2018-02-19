@@ -80,6 +80,14 @@
           <Property Name="test_text" Type="varchar(max)" />
           <Property Name="test_type" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ulh">
+          <Key>
+            <PropertyRef Name="ulh_Id" />
+          </Key>
+          <Property Name="ulh_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="diff_id" Type="int" Nullable="false" />
+          <Property Name="text" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="user_id" />
@@ -164,6 +172,7 @@
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role_users" EntityType="Self.role_users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ulh" EntityType="Self.ulh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_answer_Toquestion" Association="Self.FK_answer_Toquestion">
             <End Role="question" EntitySet="question" />
@@ -333,6 +342,7 @@
             <End Role="user" EntitySet="users" />
           </AssociationSet>
           <EntitySet Name="chats" EntityType="unipiforumSQLModel.chat" />
+          <EntitySet Name="ulhs" EntityType="unipiforumSQLModel.ulh" />
         </EntityContainer>
         <EntityType Name="result">
           <Key>
@@ -380,6 +390,14 @@
           <Property Name="group_id" Type="Int32" Nullable="false" />
           <Property Name="chat_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="chat_time" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ulh">
+          <Key>
+            <PropertyRef Name="ulh_Id" />
+          </Key>
+          <Property Name="ulh_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diff_id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -479,6 +497,15 @@
                 <ScalarProperty Name="group_id" ColumnName="group_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ulhs">
+            <EntityTypeMapping TypeName="unipiforumSQLModel.ulh">
+              <MappingFragment StoreEntitySet="ulh">
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="diff_id" ColumnName="diff_id" />
+                <ScalarProperty Name="ulh_Id" ColumnName="ulh_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

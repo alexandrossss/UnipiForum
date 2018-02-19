@@ -34,5 +34,6 @@ namespace UnipiForum.Models
         public virtual DbSet<result> results { get; set; }
         public virtual DbSet<group> groups { get; set; }
         public virtual DbSet<chat> chats { get; set; }
+        public virtual DbSet<ulh> ulhs { get; set; }
     }
 }

@@ -55,8 +55,10 @@ namespace UnipiForum.Areas.Admin.Controllers
                     });
                 }
 
+                var _ulh = context.ulhs.FirstOrDefault(o => o.diff_id == group.diff_id);
                 return View(new GTG
                 {
+                    Ulh = _ulh,
                     Group = group,
                     ChatMessages = chatModel
                 });

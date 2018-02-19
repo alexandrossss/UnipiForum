@@ -13,6 +13,7 @@ namespace UnipiForum.Areas.Admin.ViewModels
     public class GTG
     {
         public group Group { get; set; }
+        public ulh Ulh { get; set; }
         public List<ChatMessageViewModel> ChatMessages { get; set; }
     }
 
