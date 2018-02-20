@@ -48,7 +48,7 @@
                         @using (var context = new unipiforumSQLEntities2())
                         {
                             var groupId = context.users.FirstOrDefault(i => i.user_id == user.user_id).group_id;
-                            if (groupId !=null)
+                            if (groupId != null)
                             {
                                 <a href="@Url.Action("GTG", "Groups", new {context.users.FirstOrDefault(i => i.user_id == user.user_id).group_id})" class="btn btn-xs btn-primary">
                                     <i class="glyphicon glyphicon-dashboard"></i>
@@ -62,5 +62,6 @@
 
             </tr>
         }
+
     </tbody>
 </table>

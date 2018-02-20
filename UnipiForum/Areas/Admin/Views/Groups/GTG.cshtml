@@ -31,6 +31,10 @@
     <div class="panel-heading" style="font-weight: bold;" >Ulh</div>
     <div class="panel-body"> @Model.Ulh.text</div>
 </div>
+<div class="panel-body panel-heading panel panel-default">
+    @{ var type_id = Model.Group.diff_id + 1;}
+    <h4><a href="@Url.Action("Index", "UserTests",new {area="",type_id})">Do the Test of this section!</a></h4>
+</div>
 
 <div id="chatContainer" class="chatContainer" style="width: 100%;">
 

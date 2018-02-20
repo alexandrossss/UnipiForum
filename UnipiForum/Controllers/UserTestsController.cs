@@ -13,19 +13,19 @@ namespace UnipiForum.Controllers
     public class UserTestsController : Controller
     {
 
-        public ActionResult Index()
+        public ActionResult Index(int type_id)
         {
 
             using (var context = new unipiforumSQLEntities2())
             {
-                var test_id = 1;
-                var _test = context.tests.Find(test_id);
+                
+                var _test = context.tests.FirstOrDefault(p=>p.test_type==type_id);
 
 
                 //take questions list of the text that i am running
-                var _questions = context.questions.ToList()?.Where(a => a.test_id == test_id).ToList();
+                var _questions = context.questions.ToList()?.Where(a => a.test_id == _test.test_id).ToList();
 
-                var questions = context.questions.Include("answers").ToList().Where(s => s.test_id == test_id).ToList();
+                var questions = context.questions.Include("answers").ToList().Where(s => s.test_id == _test.test_id).ToList();
 
 
                 var anssadasda = context.answers.Select(ans => new AnswersRadioButton

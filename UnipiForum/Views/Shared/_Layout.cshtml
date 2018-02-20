@@ -32,7 +32,7 @@
                 if (User.IsInRole("admin"))
                 {
                     <li class="pull-right">
-                        <a href="@Url.Action("Index", "Users", new {area = "admin"})">Go to Admin Page</a>`
+                        <a href="@Url.Action("Index", "Users", new {area = "admin"})">Go to Admin Page</a>
                     </li>
 
                 }
@@ -63,7 +63,7 @@
                 {
                     if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
                     {
-                        <p>Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("UserTests")">Do your first test</a></p>
+                <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
                     }
                 }
 
