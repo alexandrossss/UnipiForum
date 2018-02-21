@@ -1,4 +1,5 @@
-﻿@using UnipiForum.Models
+﻿@using System.Configuration
+@using UnipiForum.Models
 @model UnipiForum.Areas.Admin.ViewModels.UsersIndex
 
 <h1>Users</h1>
@@ -31,7 +32,7 @@
                     <div class="btn-group">
                         <a href="@Url.Action("edit", new {user.user_id})" class="btn btn-xs btn-primary">
                             <i class="glyphicon glyphicon-edit"></i>
-                            Edit
+                            Edit Or Evaluate User
                         </a>
                         <a href="@Url.Action("resetpassword", new {user.user_id})" class="btn btn-xs btn-default">
                             <i class="glyphicon glyphicon-lock"></i>
@@ -56,6 +57,18 @@
                                 </a>
 
                             }
+
+
+                            var uId = "/Files/project" + user.user_university_id + ".rar";
+                            var SiteRootUrl = ConfigurationManager.AppSettings["Route_Url"];
+                            var flex = SiteRootUrl + "/Files/project" +user.user_university_id + ".rar";
+
+                            if (File.Exists(flex))
+                            {
+                                <a href='@uId'class="btn btn-xs btn-primary" download>Download the project of this user </a>
+                            }
+
+
                         }
                     </div>
                 </td>

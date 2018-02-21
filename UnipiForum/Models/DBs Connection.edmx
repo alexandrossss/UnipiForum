@@ -98,6 +98,7 @@
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="password_hash" Type="nvarchar" MaxLength="50" />
           <Property Name="group_id" Type="int" />
+          <Property Name="passed_text" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_answer_Toquestion">
           <End Role="question" Type="Self.question" Multiplicity="1">
@@ -259,6 +260,7 @@
           <NavigationProperty Name="role_users" Relationship="Self.FK_role_users_Touser" FromRole="user" ToRole="role_users" />
           <Property Name="group_id" Type="Int32" />
           <NavigationProperty Name="group" Relationship="unipiforumSQLModel.FK_user_Togroup" FromRole="user" ToRole="group" />
+          <Property Name="passed_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_answer_Toquestion">
           <End Role="question" Type="Self.question" Multiplicity="1">
@@ -454,6 +456,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="unipiforumSQLModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="passed_text" ColumnName="passed_text" />
                 <ScalarProperty Name="group_id" ColumnName="group_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_university_id" ColumnName="user_university_id" />

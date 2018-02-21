@@ -1,4 +1,5 @@
-﻿@model UnipiForum.Areas.Admin.ViewModels.UsersEdit
+﻿@using System.Configuration
+@model UnipiForum.Areas.Admin.ViewModels.UsersEdit
 
 <h1>Edit User @Model.Username</h1>
 
@@ -20,6 +21,15 @@
         @Html.LabelFor(f => f.Email)
         @Html.TextBoxFor(f => f.Email, new { @class = "form-control", type = "email" })
     </div>
+    var SiteRootUrl = ConfigurationManager.AppSettings["Route_Url"];
+    var flexpr = SiteRootUrl +"/Files/project" + Model.University_ID + ".rar";
+    if (File.Exists(flexpr))
+    {
+        <div class="form-group">
+            @Html.LabelFor(f => f.Passed_Text, "Passed Project Answer")
+            @Html.TextBoxFor(f => f.Passed_Text, new { @class = "form-control"})
+        </div>
+    }
 
     @Html.Partial("_RoleEditor", Model.Roles)
 

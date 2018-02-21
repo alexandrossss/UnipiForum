@@ -1,0 +1,66 @@
+﻿<h2>Here is the final project</h2>
+
+<p> You are asked to implement a simple basic project in C #, a window application where
+    the four basic acts will be executed. The user will enter numbers in 2 fields and
+    will choose one of the four basic acts. Then, at the touch of a button, one
+    a third field of text will indicate the outcome of the act.
+    It is desirable to make all the necessary checks (within your code) so that
+    your program is executed correctly, regardless of the data the user can import
+    user (eg splitting option and in the second field 0). </p>
+
+<p>Upload the Answer here in rar with name of "project(youruserid)" like projectp11165 </p>
+
+<table>
+    <tr>
+        <td>
+            <div id="uploadMsg"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="form-group" style="display: inline-block; max-width: 100%; margin-bottom: 8px; font-weight: bold">Upload your project in a rar file! If you upload a second file it will override the first!  </div>
+            <div>
+                <input type="file" id="fileOne" name="files[0]" style="margin-bottom: 8px;" />
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button type="button" class="btn btn-primary" id="btnUpload">UPLOAD FILES</button>
+        </td>
+    </tr>
+</table>
+
+@Html.Hidden("FileUploadUrl", Url.Action("UploadProject", "Home"))
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $('#btnUpload').click(function () {
+            debugger;
+            //var fileUploadUrl = $('#FileUploadUrl').val();
+            var files = new FormData();
+            var file1 = document.getElementById("fileOne").files[0];
+            //var file2 = document.getElementById("fileTwo").files[0];
+            files.append('files[0]', file1);
+            //files.append('files[1]', file2);
+
+            $.ajax({
+                type: 'POST',
+                url: "uploadproject",
+                data: files,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    window.location.reload();
+                    $('#uploadMsg').text('Files have been uploaded successfully');
+                        
+                },
+                error: function (error) {
+                    $('#uploadMsg').text('Error has occured. Upload is failed');
+                }
+            });
+        });
+    });
+</script>

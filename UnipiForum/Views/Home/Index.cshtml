@@ -1,80 +1,28 @@
-﻿@*<!DOCTYPE html>
+﻿@*@using UnipiForum.Models
 
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Index</title>
-    </head>
-    <body>
-        <div>*@
-@*<h1> Home page</h1>*@
-@*<a href="@Url.Action("Index","UploadFile")" class="btn btn-xs btn-primary">
-                <i class="glyphicon glyphicon-dashboard"></i>
-                Upload a File
-            </a>
-           </div>
-    </body>
-    </html>*@
+<html>
 
+<body>
+<div class="container">
+<header>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Welcome back, @User.Identity.Name</p>
+        using (var context = new unipiforumSQLEntities2())
+        {
+            if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
+            {
+                <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
+            }
+        }
 
-<script type="text/javascript" src="~/Scripts/Index.js"></script>
-@Html.Hidden("FileUploadUrl", Url.Action("UploadFiles", "Home"))
-<table>
-    <tr>
-        <td>
-            <div id="uploadMsg"></div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div>File One: </div>
-            <div>
-                <input type="file" id="fileOne" name="files[0]" />
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div>File Two: </div>
-            <div>
-                <input type="file" id="fileTwo" name="files[1]" />
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button type="button" id="btnUpload">UPLOAD FILES</button>
-        </td>
-    </tr>
-</table>
+    }
+
+</header>
+<br />
+<br />
+</div>
+</body>
+</html>*@
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        $('#btnUpload').click(function () {
-            debugger;
-            //var fileUploadUrl = $('#FileUploadUrl').val();
-            var files = new FormData();
-            var file1 = document.getElementById("fileOne").files[0];
-            //var file2 = document.getElementById("fileTwo").files[0];
-            files.append('files[0]', file1);
-            //files.append('files[1]', file2);
-
-            $.ajax({
-                type: 'POST',
-                url: "uploadfiles",
-                data: files,
-                dataType: 'json',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    $('#uploadMsg').text('Files have been uploaded successfully');
-                },
-                error: function (error) {
-                    $('#uploadMsg').text('Error has occured. Upload is failed');
-                }
-            });
-        });
-    });
-</script>

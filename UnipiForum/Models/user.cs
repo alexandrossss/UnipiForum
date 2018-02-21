@@ -26,6 +26,7 @@ namespace UnipiForum.Models
         public string email { get; set; }
         public string password_hash { get; set; }
         public Nullable<int> group_id { get; set; }
+        public string passed_text { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<role_users> role_users { get; set; }

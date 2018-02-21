@@ -61,9 +61,18 @@
                 <p>Welcome back, @User.Identity.Name</p>
                 using (var context = new unipiforumSQLEntities2())
                 {
-                    if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
+                    if ((User.IsInRole("") || User.IsInRole("student")) && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
                     {
-                <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
+                        <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
+                    }
+                    else if ((User.IsInRole("") || User.IsInRole("student")) && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id != null))
+                    {
+                        var groupID = context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id;
+                        var DiffID = context.groups.FirstOrDefault(p => p.group_id == groupID).diff_id;
+                        if ((User.IsInRole("") || User.IsInRole("student")) && (DiffID == 3))
+                        {
+                            <p>Now you are able to see the final Project!<a href="@Url.RouteUrl("projectpage")"> Go to final project page!</a></p>
+                        }
                     }
                 }
 

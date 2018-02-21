@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NHibernate.Linq;
@@ -131,11 +133,23 @@ namespace UnipiForum.Areas.Admin.Controllers
                     University_ID = user.user_university_id,
                     Username = user.username,
                     Email = user.email,
-
+                    Passed_Text = user.passed_text,
                     Roles = _roles
                 });
             }
         }
+
+        //public ActionResult DownloadProject(int user_id)
+        //{
+        //    var SiteRootUrl = ConfigurationManager.AppSettings["Route_Url"];
+        //    var flexpr = SiteRootUrl + "/Files/project" + Model.Users.user_university_id + ".rar";
+        //    //if (File.Exists(flexpr))
+        //    //{
+        //        WebClient Client =new WebClient();
+        //    Client.DownloadFile();
+
+        //    return null;
+        //}
 
         [HttpPost]
         public ActionResult Edit(int user_id, UsersEdit form)
@@ -191,6 +205,7 @@ namespace UnipiForum.Areas.Admin.Controllers
                 }
                 user.username = form.Username;
                 user.email = form.Email;
+                user.passed_text = form.Passed_Text;
 
                 context.SaveChanges();
 
@@ -245,8 +260,15 @@ namespace UnipiForum.Areas.Admin.Controllers
             {
 
                 var user = context.users.Find(user_id);
+                var roleusers = context.role_users.Where(p => p.user_id == user_id).ToList();
+
                 if (user == null)
                     return HttpNotFound();
+                foreach (var rl in roleusers)
+                {
+                    context.role_users.Remove(rl);
+                }
+                
                 context.users.Remove(user);                //Database.Session.Delete(user);
                 context.SaveChanges();
                 return RedirectToAction("index");

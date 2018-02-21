@@ -42,6 +42,9 @@ namespace UnipiForum.Areas.Admin.ViewModels
         [Required, MaxLength(256), DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required, MaxLength(256)]
+        public string Passed_Text { get; set; }
+
 
         public IList<RoleCheckbox> Roles { get; set; }
     }

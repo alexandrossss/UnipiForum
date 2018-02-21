@@ -40,6 +40,9 @@ namespace UnipiForum
             routes.MapRoute("UploadFile", "uploadfile", new {controller = "UploadFile", action = "Index"}, namespaces);
 
             routes.MapRoute("UploadFiles", "uploadfiles", new { controller = "Home", action = "UploadFiles" }, namespaces);
+            routes.MapRoute("UploadProject", "uploadproject", new { controller = "Home", action = "UploadProject" }, namespaces);
+
+            routes.MapRoute("ProjectPage", "projectpage", new { controller = "Home", action = "ProjectPage" }, namespaces);
 
 
             //routes.MapRoute("Chat", "GetChatMessages", new {controller = "Chat", action = "GetChatMessages"}, chatNamespace);

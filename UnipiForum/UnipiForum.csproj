@@ -277,9 +277,6 @@
     <Content Include="docs\MySqlParameterCollection.xml" />
     <Content Include="docs\MySqlTransaction.xml" />
     <Content Include="favicon.ico" />
-    <Content Include="Files\user5.jpg" />
-    <Content Include="Files\user23.jpg" />
-    <Content Include="Files\user2.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
@@ -326,6 +323,9 @@
     <Content Include="Areas\Admin\Views\Groups\AllGroups.cshtml" />
     <Content Include="Areas\Admin\Views\Users\UserGroup.cshtml" />
     <Content Include="Areas\Admin\Views\Groups\GTG.cshtml" />
+    <None Include="Properties\PublishProfiles\AlexServer - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -358,7 +358,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\ProjectPage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
@@ -372,6 +372,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>

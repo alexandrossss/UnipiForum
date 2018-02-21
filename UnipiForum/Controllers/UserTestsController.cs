@@ -293,8 +293,8 @@ namespace UnipiForum.Controllers
                     var testdiff = test.test_type-1;
                     if (testResults >= 0.45 && testdiff==3)
                     {
-                        // you won
-                        
+                        return RedirectToAction("Results", "UserProfile");
+
                     }
                     else if (testResults >= 0.45)
                     {
