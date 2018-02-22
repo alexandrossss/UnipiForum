@@ -3,7 +3,7 @@
 @model UnipiForum.ViewModels.MyProfileViewModel
 
 
-<h3>My profile</h3>
+<h3>User Page</h3>
 @{ var uId = "/Files/user" + Model.Users.user_id + ".jpg";}
 @helper SelectedTabClass(string tabName)
     {
@@ -47,10 +47,10 @@
 
     @*<h1>Hi @Model.Users.username</h1>*@
 
-    <div >
+    <div>
         @{
             var SiteRootUrl = ConfigurationManager.AppSettings["Route_Url"];
-            var flex = SiteRootUrl +"/Files/user" + Model.Users.user_id + ".jpg";
+            var flex = SiteRootUrl + "/Files/user" + Model.Users.user_id + ".jpg";
         }
         @if (File.Exists(flex))
         {
@@ -66,7 +66,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="form-group" style="display: inline-block; max-width: 100%; margin-bottom: 8px; font-weight: bold">Upload your image in jpg format with max 50 mb!If you upload a second file it will override the first!</div>
+                        <div class="form-group" style="display: inline-block; max-width: 100%; margin-bottom: 8px; font-weight: bold">Upload your image in jpg format with max 10 mb!If you upload a second file it will override the first!</div>
                         <div>
                             <input type="file" id="fileOne" name="files[0]" style="margin-bottom: 8px;" />
                         </div>
@@ -74,7 +74,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-primary" id="btnUpload">UPLOAD FILES</button>
+                        <button type="button" class="btn btn-primary" id="btnUpload">Upload photo</button>
                     </td>
                 </tr>
             </table>}
@@ -98,8 +98,12 @@
             @Html.LabelFor(f => f.Users.email, "Email")
             @Html.TextBoxFor(f => f.Users.email, new { @class = "form-control", type = "email" })
         </div>
+        <div class="form-group" style="width: 40%">
+            @Html.LabelFor(f => f.Users.password_hash, "Password")
+            @Html.TextBoxFor(f => f.Users.password_hash, new { @class = "form-control", type = "password" })
+        </div>
 
-        var flexpr = SiteRootUrl +"/Files/project" + Model.Users.user_university_id + ".rar"; 
+        var flexpr = SiteRootUrl + "/Files/project" + Model.Users.user_university_id + ".rar";
         if (File.Exists(flexpr))
         {
             <div class="form-group" style="width: 40%">
@@ -138,7 +142,7 @@
                     success: function (response) {
                         window.location.reload();
                         $('#uploadMsg').text('Files have been uploaded successfully');
-                        
+
                     },
                     error: function (error) {
                         $('#uploadMsg').text('Error has occured. Upload is failed');

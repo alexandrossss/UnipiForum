@@ -1,4 +1,5 @@
 ﻿
+@using UnipiForum.Models
 @model UnipiForum.ViewModels.ResultsViewModel
 
 
@@ -26,6 +27,15 @@
             <li class="@(SelectedTabClass("results"))">
                 @Html.ActionLink("Results", "Results", "UserProfile", new { })
             </li>
+            @using (var context = new unipiforumSQLEntities2())
+            {
+                if ((User.IsInRole("") || User.IsInRole("student")) && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id != null))
+                {
+                    <li class="@(SelectedTabClass("usergroups"))">
+                        <a href="@Url.Action("GTG", "Groups", new {area = "admin", context.users.FirstOrDefault(i => i.username == User.Identity.Name).group_id})">Go to my Group</a>`
+                    </li>
+                }
+            }
         </ul>
 
     </div>
@@ -40,12 +50,12 @@
             @foreach (var test in Model.Results)
             {
                 var testId = test.test_id;
-                
-                if (lastId != testId) 
+
+                if (lastId != testId)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading" onclick="myFunction(@testId)">Test Text: @test.test_text</div>
-                        <div id = @testId>
+                        <div id=@testId>
 
                             @{
                                 double isTrue = 0;

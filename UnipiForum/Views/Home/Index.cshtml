@@ -1,28 +1,63 @@
-﻿@*@using UnipiForum.Models
+﻿@using UnipiForum.Models
+<div class="panel-body">
+    <p>Unipi Forum is an Aplication that help us to study C# .</p>
+</div>
 
-<html>
 
-<body>
 <div class="container">
-<header>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <p>Welcome back, @User.Identity.Name</p>
-        using (var context = new unipiforumSQLEntities2())
+    <header>
+        @if (User.Identity.IsAuthenticated)
         {
-            if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
+            <p>Welcome back, @User.Identity.Name</p>
+            using (var context = new unipiforumSQLEntities2())
             {
-                <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
+                if ((User.IsInRole("") || User.IsInRole("student")) && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
+                {
+                    <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
+                }
+                else if ((User.IsInRole("") || User.IsInRole("student")) && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id != null))
+                {
+                    var groupID = context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id;
+                    var DiffID = context.groups.FirstOrDefault(p => p.group_id == groupID).diff_id;
+                    if ((User.IsInRole("") || User.IsInRole("student")) && (DiffID == 3))
+                    {
+                        <p>Now you are able to see the final Project!<a href="@Url.RouteUrl("projectpage")"> Go to final project page!</a></p>
+                    }
+                }
             }
+
         }
 
-    }
-
-</header>
-<br />
-<br />
+    </header>
+    <br />
+    <br />
 </div>
-</body>
-</html>*@
+
+@*@using UnipiForum.Models
+
+    <html>
+
+    <body>
+    <div class="container">
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>Welcome back, @User.Identity.Name</p>
+            using (var context = new unipiforumSQLEntities2())
+            {
+                if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
+                {
+                    <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
+                }
+            }
+
+        }
+
+    </header>
+    <br />
+    <br />
+    </div>
+    </body>
+    </html>*@
 
 
