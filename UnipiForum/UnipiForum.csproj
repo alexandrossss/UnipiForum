@@ -187,7 +187,6 @@
     <Compile Include="Areas\Admin\ViewModels\Groups.cs" />
     <Compile Include="Areas\Admin\ViewModels\Tests.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
-    <Compile Include="Areas\Admin\Controllers\ChatController.cs" />
     <Compile Include="Controllers\UploadFile.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\UserTestsController.cs" />
