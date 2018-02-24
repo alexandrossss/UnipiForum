@@ -7,6 +7,7 @@
     <thead>
         <tr>
             <th>Group ID</th>
+            @*<th>Difficulty</th>*@
             <th>Users</th>
             <th>Actions</th>
         </tr>
@@ -14,20 +15,21 @@
     <tbody>
         @foreach (var grp in Model.Groups)
         {
-            <tr>
-                <td>@grp.group_id</td>
-                <td>@string.Join(", ", grp.users.Select(users => users.username))</td>
-                @*<td>@string.Join(", ",user.roles.Select(role => role.name))</td>*@
-                <td>
-                    <div class="btn-group">
-                        <a href="@Url.Action("GTG",new {grp.group_id})" class="btn btn-xs btn-primary">
-                            <i class="glyphicon glyphicon-edit"></i>
-                            Go to this Group
-                        </a>
-                    </div>
-                </td>
+        <tr>
+            <td>@grp.group_id</td>
+            @*<td>@Model.DifficultyValue.CompareTo(grp.diff_id) </td>*@
 
-            </tr>
+            <td>@string.Join(", ", grp.users.Select(users => users.username))</td>
+            <td>
+                <div class="btn-group">
+                    <a href="@Url.Action("GTG",new {grp.group_id})" class="btn btn-xs btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        Go to this Group
+                    </a>
+                </div>
+            </td>
+
+        </tr>
         }
     </tbody>
 </table>

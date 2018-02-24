@@ -139,17 +139,7 @@ namespace UnipiForum.Areas.Admin.Controllers
             }
         }
 
-        //public ActionResult DownloadProject(int user_id)
-        //{
-        //    var SiteRootUrl = ConfigurationManager.AppSettings["Route_Url"];
-        //    var flexpr = SiteRootUrl + "/Files/project" + Model.Users.user_university_id + ".rar";
-        //    //if (File.Exists(flexpr))
-        //    //{
-        //        WebClient Client =new WebClient();
-        //    Client.DownloadFile();
-
-        //    return null;
-        //}
+        
 
         [HttpPost]
         public ActionResult Edit(int user_id, UsersEdit form)
@@ -308,32 +298,6 @@ namespace UnipiForum.Areas.Admin.Controllers
             }
         }
 
-        //private void SyncRoles(ICollection<RoleCheckbox> checkboxes, ICollection<role> roles)
-        //{
-
-        //    using (var context = new unipiforumSQLEntities())
-        //    {
-
-        //        var selectedRoles = new List<role>();
-        //        var _roles = context.roles;
-        //        foreach (var role in _roles)
-        //        {
-        //            var checkbox = checkboxes.Single(c => c.Id == role.role_id);
-        //            checkbox.Name = role.name;
-
-        //            if (checkbox.IsChecked)
-        //                selectedRoles.Add(role);
-        //        }
-
-        //        foreach (var toadd in selectedRoles.Where(t => !roles.Contains(t)).ToList())
-        //            roles.Add(toadd);
-
-        //        foreach (var toRemove in roles.Where(t => !selectedRoles.Contains(t)).ToList())
-        //            roles.Remove(toRemove);
-
-
-
-        //    }
-        //}
+       
     }
 }

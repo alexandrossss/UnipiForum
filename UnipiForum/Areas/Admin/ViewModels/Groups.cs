@@ -8,6 +8,18 @@ namespace UnipiForum.Areas.Admin.ViewModels
     public class GroupsIndex
     {
         public IEnumerable<group> Groups { get; set; }
+        public Difficulty DifficultyValue { get; set; }
+        public enum Difficulty
+        {
+            [Display(Name = "First")]
+            First,
+            [Display(Name = "Second`")]
+            Second,
+            [Display(Name = "Thrird`")]
+            Thrird,
+            [Display(Name = "Forth")]
+            Forth
+        }
     }
 
     public class GTG

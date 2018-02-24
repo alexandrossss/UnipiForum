@@ -26,8 +26,6 @@ namespace UnipiForum.Areas.Admin.Controllers
                 return View(new GroupsIndex
                 {
                     Groups = _groups.ToList()
-
-
                 });
 
             }
