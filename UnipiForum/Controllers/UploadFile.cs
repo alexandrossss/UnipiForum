@@ -6,45 +6,45 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using NHibernate.Linq;
-using UnipiForum.Models;
-using UnipiForum.ViewModels;
+//using NHibernate.Linq;
+//using UnipiForum.Models;
+//using UnipiForum.ViewModels;
 
-namespace UnipiForum.Controllers
-{
-    public class UploadFile : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
+//namespace UnipiForum.Controllers
+//{
+//    public class UploadFile : Controller
+//    {
+//        public ActionResult Index()
+//        {
+//            return View();
+//        }
 
-        [HttpPost]
-        public ActionResult UploadFiles()
-        {
-            bool isSuccess = false;
-            string serverMessage = string.Empty;
-            var fileOne = Request.Files[0] as HttpPostedFileBase;
-            var fileTwo = Request.Files[1] as HttpPostedFileBase;
-            string uploadPath = ConfigurationManager.AppSettings["UPLOAD_PATH"].ToString();
-            string newFileOne = Path.Combine(uploadPath, fileOne.FileName);
-            string newFileTwo = Path.Combine(uploadPath, fileTwo.FileName);
+//        [HttpPost]
+//        public ActionResult UploadFiles()
+//        {
+//            bool isSuccess = false;
+//            string serverMessage = string.Empty;
+//            var fileOne = Request.Files[0] as HttpPostedFileBase;
+//            var fileTwo = Request.Files[1] as HttpPostedFileBase;
+//            string uploadPath = ConfigurationManager.AppSettings["UPLOAD_PATH"].ToString();
+//            string newFileOne = Path.Combine(uploadPath, fileOne.FileName);
+//            string newFileTwo = Path.Combine(uploadPath, fileTwo.FileName);
 
-            fileOne.SaveAs(newFileOne);
-            fileTwo.SaveAs(newFileTwo);
+//            fileOne.SaveAs(newFileOne);
+//            fileTwo.SaveAs(newFileTwo);
 
-            if (System.IO.File.Exists(newFileOne) && System.IO.File.Exists(newFileTwo))
-            {
-                isSuccess = true;
-                serverMessage = "Files have been uploaded successfully";
-            }
-            else
-            {
-                isSuccess = false;
-                serverMessage = "Files upload is failed. Please try again.";
-            }
+//            if (System.IO.File.Exists(newFileOne) && System.IO.File.Exists(newFileTwo))
+//            {
+//                isSuccess = true;
+//                serverMessage = "Files have been uploaded successfully";
+//            }
+//            else
+//            {
+//                isSuccess = false;
+//                serverMessage = "Files upload is failed. Please try again.";
+//            }
 
-            return Json(new {IsSucccess = isSuccess, ServerMessage = serverMessage}, JsonRequestBehavior.AllowGet);
-        }
-    }
-}
+//            return Json(new {IsSucccess = isSuccess, ServerMessage = serverMessage}, JsonRequestBehavior.AllowGet);
+//        }
+//    }
+//}

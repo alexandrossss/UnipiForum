@@ -33,31 +33,5 @@
     <br />
 </div>
 
-@*@using UnipiForum.Models
-
-    <html>
-
-    <body>
-    <div class="container">
-    <header>
-        @if (User.Identity.IsAuthenticated)
-        {
-            <p>Welcome back, @User.Identity.Name</p>
-            using (var context = new unipiforumSQLEntities2())
-            {
-                if (User.IsInRole("") || User.IsInRole("student") && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
-                {
-                    <p> Do a test for the first time! With this we will able to put you with students with the same level with you! <a href="@Url.RouteUrl("usertests",new{type_id=0})">Do your first test!</a></p>
-                }
-            }
-
-        }
-
-    </header>
-    <br />
-    <br />
-    </div>
-    </body>
-    </html>*@
 
 

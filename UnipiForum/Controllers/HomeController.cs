@@ -25,16 +25,16 @@ namespace UnipiForum.Controllers
                 bool isSuccess = false;
                 string serverMessage = string.Empty;
                 var fileOne = Request.Files[0] as HttpPostedFileBase;
-                //var fileTwo = Request.Files[1] as HttpPostedFileBase;
-                string uploadPath =Server.MapPath(".\\Files"); // ConfigurationManager.AppSettings["UPLOAD_PATH"].ToString();
+                
+                string uploadPath =Server.MapPath(".\\Files"); 
                 var newfilename =$"project{context.users.FirstOrDefault(p => p.username == User.Identity.Name).user_university_id}.rar";
                 string newFileOne = Path.Combine(uploadPath, newfilename);
-                //string newFileTwo = Path.Combine(uploadPath, fileTwo.FileName);
+                
 
                 fileOne.SaveAs(newFileOne);
-                //fileTwo.SaveAs(newFileTwo);
+                
 
-                if (System.IO.File.Exists(newFileOne)) // && System.IO.File.Exists(newFileTwo))
+                if (System.IO.File.Exists(newFileOne)) 
                 {
                     isSuccess = true;
                     serverMessage = "Files have been uploaded successfully";
@@ -65,16 +65,16 @@ namespace UnipiForum.Controllers
                 bool isSuccess = false;
                 string serverMessage = string.Empty;
                 var fileOne = Request.Files[0] as HttpPostedFileBase;
-                //var fileTwo = Request.Files[1] as HttpPostedFileBase;
-                string uploadPath =Server.MapPath(".\\Files"); // ConfigurationManager.AppSettings["UPLOAD_PATH"].ToString();
+                
+                string uploadPath =Server.MapPath(".\\Files"); 
                 var newfilename =$"user{context.users.FirstOrDefault(p => p.username == User.Identity.Name).user_id}.jpg";
                 string newFileOne = Path.Combine(uploadPath, newfilename);
-                //string newFileTwo = Path.Combine(uploadPath, fileTwo.FileName);
+                
 
                 fileOne.SaveAs(newFileOne);
-                //fileTwo.SaveAs(newFileTwo);
+                
 
-                if (System.IO.File.Exists(newFileOne)) // && System.IO.File.Exists(newFileTwo))
+                if (System.IO.File.Exists(newFileOne)) 
                 {
                     isSuccess = true;
                     serverMessage = "Files have been uploaded successfully";

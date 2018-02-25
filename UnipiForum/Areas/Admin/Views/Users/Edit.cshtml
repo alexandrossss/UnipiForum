@@ -6,10 +6,10 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-  
+
     @Html.ValidationSummary()
     <div class="form-group">
-        @Html.LabelFor(f => f.University_ID)
+        @Html.LabelFor(f => f.University_ID,"University ID")
         @Html.TextBoxFor(f => f.University_ID, new { @class = "form-control" })
     </div>
     <div class="form-group">
@@ -21,13 +21,18 @@
         @Html.LabelFor(f => f.Email)
         @Html.TextBoxFor(f => f.Email, new { @class = "form-control", type = "email" })
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(f => f.GroupID,"Group ID")
+        @Html.TextBoxFor(f => f.GroupID, new { @class = "form-control"})
+    </div>
     var SiteRootUrl = ConfigurationManager.AppSettings["Route_Url"];
-    var flexpr = SiteRootUrl +"/Files/project" + Model.University_ID + ".rar";
+    var flexpr = SiteRootUrl + "/Files/project" + Model.University_ID + ".rar";
     if (File.Exists(flexpr))
     {
         <div class="form-group">
             @Html.LabelFor(f => f.Passed_Text, "Passed Project Answer")
-            @Html.TextBoxFor(f => f.Passed_Text, new { @class = "form-control"})
+            @Html.TextBoxFor(f => f.Passed_Text, new { @class = "form-control" })
         </div>
     }
 

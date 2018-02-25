@@ -133,6 +133,7 @@ namespace UnipiForum.Areas.Admin.Controllers
                     University_ID = user.user_university_id,
                     Username = user.username,
                     Email = user.email,
+                    GroupID = user.group_id,
                     Passed_Text = user.passed_text,
                     Roles = _roles
                 });

@@ -4,7 +4,7 @@
 
 
 <h3>User Page</h3>
-@{ var uId = "/Files/user" + Model.Users.user_id + ".jpg";}
+
 @helper SelectedTabClass(string tabName)
     {
         if (tabName == ViewBag.SelectedTab)
@@ -49,6 +49,7 @@
 
     <div>
         @{
+            var uId = "/Files/user" + Model.Users.user_id + ".jpg";
             var SiteRootUrl = ConfigurationManager.AppSettings["Route_Url"];
             var flex = SiteRootUrl + "/Files/user" + Model.Users.user_id + ".jpg";
         }
