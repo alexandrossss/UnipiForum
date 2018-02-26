@@ -1,4 +1,5 @@
-﻿@model UnipiForum.Areas.Admin.ViewModels.GroupsIndex
+﻿@using UnipiForum.Areas.Admin.ViewModels
+@model UnipiForum.Areas.Admin.ViewModels.GroupsIndex
 
 <h1>All Groups</h1>
 @*Groups View for Admin*@
@@ -7,7 +8,7 @@
     <thead>
         <tr>
             <th>Group ID</th>
-            @*<th>Difficulty</th>*@
+            <th>Difficulty</th>
             <th>Users</th>
             <th>Actions</th>
         </tr>
@@ -17,8 +18,8 @@
         {
         <tr>
             <td>@grp.group_id</td>
-            @*<td>@Model.DifficultyValue.CompareTo(grp.diff_id) </td>*@
-
+            @{ GroupsIndex.Difficulty e = (GroupsIndex.Difficulty)grp.diff_id;}
+            <td>@e </td>
             <td>@string.Join(", ", grp.users.Select(users => users.username))</td>
             <td>
                 <div class="btn-group">

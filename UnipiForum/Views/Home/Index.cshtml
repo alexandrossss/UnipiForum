@@ -1,14 +1,11 @@
 ﻿@using UnipiForum.Models
-<div class="panel-body">
-    <p>Unipi Forum is an Aplication that help us to study C# .</p>
-</div>
 
 
 <div class="container">
     <header>
         @if (User.Identity.IsAuthenticated)
         {
-            <p>Welcome back, @User.Identity.Name</p>
+            <h3>Welcome back, @User.Identity.Name</h3>
             using (var context = new unipiforumSQLEntities2())
             {
                 if ((User.IsInRole("") || User.IsInRole("student")) && (context.users.FirstOrDefault(p => p.username == User.Identity.Name).group_id == null))
@@ -32,6 +29,10 @@
     <br />
     <br />
 </div>
+<div class="panel-body">
+    <p>This Web Application was created to support collaborative learning. It is implemented with the ASP.NET MVC framework in C# with SQL database. Its main purpose is to simplify the communication of the students and the teacher, the collaboration of the student in teams with the help of live chat, the examination with tests or project that teacher rates. Teacher can manage the users by giving them roles (student, admin), she can examine the students' test results and chat with every group created in the system.</p>
+</div>
+
 
 
 

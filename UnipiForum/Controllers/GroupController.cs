@@ -42,7 +42,12 @@ namespace UnipiForum.Controllers
                         }
                     }
                 }
-
+                var fMessage = new chat();
+                //fMessage.user_id = 5;
+                //fMessage.chat_text = "Welcome to Group you can type here your first message";
+                //fMessage.chat_time = DateTime.Now;
+                //fMessage.group_id = theGroup;
+                //context.chats.Add(fMessage);
                 user.group_id = theGroup;
                 context.SaveChanges();
                     //here you will assign a user for the first time to a Group
