@@ -31,7 +31,12 @@ namespace UnipiForum.Controllers
                     var nGroup=new group();
                     nGroup.diff_id = diffId;
                     context.groups.Add(nGroup);
-                    context.SaveChanges();
+                    var fMessage = new chat();
+                    fMessage.user_id = 5;
+                    fMessage.chat_text = "Welcome to Group you can type here your first message";
+                    fMessage.chat_time = DateTime.UtcNow;
+
+
 
                     groupsOfThatDiff= context.groups.Where(o => o.diff_id == diffId).ToList();
                     foreach (var grp in groupsOfThatDiff)
@@ -41,13 +46,10 @@ namespace UnipiForum.Controllers
                             theGroup = grp.group_id;
                         }
                     }
+                    fMessage.group_id = theGroup;
+                    context.chats.Add(fMessage);
                 }
-                var fMessage = new chat();
-                //fMessage.user_id = 5;
-                //fMessage.chat_text = "Welcome to Group you can type here your first message";
-                //fMessage.chat_time = DateTime.Now;
-                //fMessage.group_id = theGroup;
-                //context.chats.Add(fMessage);
+                
                 user.group_id = theGroup;
                 context.SaveChanges();
                     //here you will assign a user for the first time to a Group
